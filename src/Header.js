@@ -7,10 +7,11 @@ const Header = () => {
     const [id, setId] = useState('');
     const [result, setResult] = useState([]);
     const [message, setMessage] = useState('')
-    let playedId = [];
-    for(let key in MockData){
-        playedId = [...playedId, ...Object.keys(MockData[key][0])];
-    }
+
+    // let playedId = [];
+    // for(let key in MockData){
+    //     playedId = [...playedId, ...Object.keys(MockData[key][0])];
+    // }
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -22,10 +23,11 @@ const Header = () => {
                 let filteredData = {};
                 for(let player in data){
                     filteredData[player] = {
-                        score : data[player].deal + data[player].tank*0.4 + data[player].heal*0.2
-                        // deal: data[player].deal,
-                        // tank: data[player].tank,
-                        // heal: data[player].heal
+                        score : data[player].playerDeal + data[player].playerTank*0.4 + data[player].playerHeal*0.2,
+                        matchFinalResult : data[player].matchFinalResult,
+                        deal: data[player].playerDeal,
+                        tank: data[player].playerTank,
+                        heal: data[player].playerHeal,
                     }
                 }
                 foundData.push(filteredData)
@@ -43,6 +45,7 @@ const Header = () => {
     return (
         <div>
             <StyledContainer>
+                <StyledTitle href="/"><h1>칼바람 나락 기여도 랭킹</h1></StyledTitle>
                 <form onSubmit={handleSearch}>
                 <StyledInput
                     type='text'
@@ -53,15 +56,27 @@ const Header = () => {
                 <StyledButton onClick={handleSearch}>검색</StyledButton>
                 </form>
             </StyledContainer>
-            <StyledSearchedData>
-                {result.map(data => <MatchResultRow matchInfo={data} />)}
-                {message}
-            </StyledSearchedData>
+            <StyledResultContainer>
+                <StyledResult>
+                    {result.map((data, key) => <MatchResultRow key={key} matchInfo={data} />)}
+                    {message}
+                </StyledResult>
+            </StyledResultContainer>
         </div>
     )
 }
 
-const StyledSearchedData = styled.div`
+const StyledTitle = styled.a`
+    text-decoration-line: none;
+    color: black;
+`
+
+const StyledResultContainer = styled.div`
+    display: flex;
+    justify-content: center;
+`
+
+const StyledResult = styled.div`
     text-align: center;
     margin: 20px 0 20px 0;
 `
