@@ -3,13 +3,6 @@ import PlayerCard from './PlayerCard';
 import styled from 'styled-components';
 import MockData from './mock';
 
-// background: ${props => props.isButtonHovered ? 'linear-gradient(#D6ECFA,#fff)':'linear-gradient(#FFE0E3,#fff)'};
-
-
-
-// background: ${props => 
-// props.matchfinalresult === 'win' ? 'linear-gradient(#D6ECFA,#fff)':'linear-gradient(#FFE0E3,#fff)'}
-
 const Container = styled.div`
     display: flex;
     gap: 10px;
@@ -28,9 +21,6 @@ const ShowMatchDetails = styled.button`
     cursor: pointer;
 
     background: ${props => props.backgroundSetting(props.matchfinalresult, props.isButtonHovered)}
-
-
-
 `
 
 const MatchResultRow = ({ matchInfo }) => {
