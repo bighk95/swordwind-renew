@@ -36,9 +36,10 @@ const Header = () => {
         
         if(foundData.length > 0){
             setResult(foundData);
-            setMessage('')
+            setMessage('');
         } else {
-            setMessage('검색 결과가 없습니다. ID를 확인하세요.')
+            setResult([]);
+            setMessage('검색 결과가 없습니다. ID를 확인하세요.');
         }
     }
 
