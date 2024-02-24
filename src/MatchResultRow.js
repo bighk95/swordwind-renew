@@ -1,31 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PlayerCard from './PlayerCard';
 import styled from 'styled-components';
 import MockData from './mock';
 
-/**
- * matchInfo
- * {
- *  현규: {
- *      score: 100,
- *  },
- *  ...
- * }
- */
+// background: ${props => props.isButtonHovered ? 'linear-gradient(#D6ECFA,#fff)':'linear-gradient(#FFE0E3,#fff)'};
+
+
+
+// background: ${props => 
+// props.matchfinalresult === 'win' ? 'linear-gradient(#D6ECFA,#fff)':'linear-gradient(#FFE0E3,#fff)'}
 
 const Container = styled.div`
     display: flex;
     gap: 10px;
     margin-bottom: 30px;
-    background: linear-gradient(#FFDBDF,#fff);
     border: 1px solid #E2E2E2;
     border-radius: 20px;
 
-    background: ${props => 
-        props.matchfinalresult === 'win' ? 'linear-gradient(#d6ecfa,#fff)':'linear-gradient(#FFE0E3,#fff)'}
-
-
-    `
+    background: ${props => props.backgroundSetting(props.matchfinalresult, props.isButtonHovered)}
+`
 
 const ShowMatchDetails = styled.button`
     width: 100px;
@@ -34,12 +27,31 @@ const ShowMatchDetails = styled.button`
     font-weight: bold;
     cursor: pointer;
 
-    background: ${props => 
-        props.matchfinalresult === 'win' ? 'linear-gradient(#d6ecfa,#fff)':'linear-gradient(#FFE0E3,#fff)'}
+    background: ${props => props.backgroundSetting(props.matchfinalresult, props.isButtonHovered)}
+
+
+
 `
 
 const MatchResultRow = ({ matchInfo }) => {
     const matchFinalResult = Object.values(matchInfo)[0].matchFinalResult
+    const [isButtonHovered, setIsButtonHovered] = useState(false);
+
+    const backgroundSetting = (matchFinalResult, isButtonHovered) => {
+        if(matchFinalResult === 'win'){
+            if(isButtonHovered){
+                return 'linear-gradient(#AEDCFA,#fff)'
+            } else {
+                return 'linear-gradient(#D6ECFA,#fff)'
+            }
+        } else {
+            if(isButtonHovered){
+                return 'linear-gradient(#FFB7BE,#fff)'
+            } else {
+                return 'linear-gradient(#FFE0E3,#fff)'
+            }
+        }
+    }
 
     const ShowMatchDetailsButton = () => {
         alert(
@@ -50,22 +62,28 @@ const MatchResultRow = ({ matchInfo }) => {
     }
 
     return (
-        <Container matchfinalresult={matchFinalResult}>
-            {Object.entries(matchInfo).map(([key, value]) => 
-                <PlayerCard 
-                    key={key} 
-                    name={key} 
-                    score={value.score}
-                    matchfinalresult={value.matchFinalResult}
-                />
-            )}
-            <ShowMatchDetails 
-                className='showMatchDetails' 
-                matchfinalresult={matchFinalResult}
-                onClick={ShowMatchDetailsButton}
-                >
-                상세보기
-            </ShowMatchDetails>
+        <Container 
+            matchfinalresult={matchFinalResult}
+            isButtonHovered={isButtonHovered}
+            backgroundSetting={backgroundSetting}>
+                {Object.entries(matchInfo).map(([key, value]) => 
+                    <PlayerCard 
+                        key={key} 
+                        name={key} 
+                        score={value.score}
+                        matchfinalresult={value.matchFinalResult}
+                    />)
+                }
+                <ShowMatchDetails 
+                    className='showMatchDetails' 
+                    matchfinalresult={matchFinalResult}
+                    isButtonHovered={isButtonHovered}
+                    backgroundSetting={backgroundSetting}
+                    onClick={ShowMatchDetailsButton}
+                    onMouseEnter={() => setIsButtonHovered(true)}
+                    onMouseLeave={() => setIsButtonHovered(false)}>
+                    상세보기
+                </ShowMatchDetails>
         </Container>
     );
 };
