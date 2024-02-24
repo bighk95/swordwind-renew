@@ -9,6 +9,7 @@ const Container = styled.div`
     margin-bottom: 30px;
     border: 1px solid #E2E2E2;
     border-radius: 20px;
+    transition: background 0.5s ease;
 
     background: ${props => props.backgroundSetting(props.matchfinalresult, props.isButtonHovered)}
 `
@@ -19,6 +20,7 @@ const ShowMatchDetails = styled.button`
     border-radius: 20px;
     font-weight: bold;
     cursor: pointer;
+    transition: background 0.5s ease;
 
     background: ${props => props.backgroundSetting(props.matchfinalresult, props.isButtonHovered)}
 `
@@ -30,15 +32,15 @@ const MatchResultRow = ({ matchInfo }) => {
     const backgroundSetting = (matchFinalResult, isButtonHovered) => {
         if(matchFinalResult === 'win'){
             if(isButtonHovered){
-                return 'linear-gradient(#AEDCFA,#fff)'
+                return '#AEDCFA'
             } else {
-                return 'linear-gradient(#D6ECFA,#fff)'
+                return '#D6ECFA'
             }
         } else {
             if(isButtonHovered){
-                return 'linear-gradient(#FFB7BE,#fff)'
+                return '#FFB7BE'
             } else {
-                return 'linear-gradient(#FFE0E3,#fff)'
+                return '#FFE0E3'
             }
         }
     }
@@ -55,7 +57,9 @@ const MatchResultRow = ({ matchInfo }) => {
         <Container 
             matchfinalresult={matchFinalResult}
             isButtonHovered={isButtonHovered}
-            backgroundSetting={backgroundSetting}>
+            backgroundSetting={backgroundSetting}
+            onMouseEnter={() => setIsButtonHovered(true)}
+            onMouseLeave={() => setIsButtonHovered(false)}>
                 {Object.entries(matchInfo).map(([key, value]) => 
                     <PlayerCard 
                         key={key} 
@@ -69,9 +73,7 @@ const MatchResultRow = ({ matchInfo }) => {
                     matchfinalresult={matchFinalResult}
                     isButtonHovered={isButtonHovered}
                     backgroundSetting={backgroundSetting}
-                    onClick={ShowMatchDetailsButton}
-                    onMouseEnter={() => setIsButtonHovered(true)}
-                    onMouseLeave={() => setIsButtonHovered(false)}>
+                    onClick={ShowMatchDetailsButton}>
                     상세보기
                 </ShowMatchDetails>
         </Container>
