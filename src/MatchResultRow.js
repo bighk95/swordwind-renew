@@ -50,7 +50,7 @@ const MatchResultRow = ({ matchInfo }) => {
     const ShowMatchDetailsButton = () => {
         setOpen(prev => !prev);
     }
-
+    
     return (
         <Container 
         matchfinalresult={matchFinalResult}
@@ -68,6 +68,7 @@ const MatchResultRow = ({ matchInfo }) => {
                 score={matchInfo[name].score}
                 matchfinalresult={matchInfo[name].matchFinalResult}
                 rank={index+1+'등'}
+                playerchamp={matchInfo[name].champ}
                 />)
             }
             <ShowMatchDetails 

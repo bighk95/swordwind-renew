@@ -37,7 +37,6 @@ const Header = () => {
             }
         }
 
-
         if(foundData.length > 0){
             setResult(foundData);
             setMessage('');
