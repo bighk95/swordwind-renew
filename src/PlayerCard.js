@@ -26,14 +26,20 @@ const StyledCard = styled.div`
         font-size: 24px;
         color: red;
     }
+
+    .rank {
+        font-size: 18px;
+    }
 `
 
 
-const PlayerCard = ({ name, score }) => {
+const PlayerCard = ({ name, score, rank, champIcon }) => {
     return (
         <StyledCard>
+            <div className='champIcodn'>{champIcon}</div>
             <div className='name'>{name}</div>
             <div className='score'>{score}</div>
+            <div className='rank'>{rank}</div>
         </StyledCard>
     );
 };

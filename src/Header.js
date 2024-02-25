@@ -23,17 +23,21 @@ const Header = () => {
                 let filteredData = {};
                 for(let player in data){
                     filteredData[player] = {
-                        score : data[player].playerDeal + data[player].playerTank*0.4 + data[player].playerHeal*0.2,
                         matchFinalResult : data[player].matchFinalResult,
+                        team : data[player].playerTeam,
+                        champ : data[player].playerChamp,
+                        champIcon : data[player].ChampIcon,
                         deal: data[player].playerDeal,
                         tank: data[player].playerTank,
                         heal: data[player].playerHeal,
+                        score : data[player].playerDeal + data[player].playerTank*0.4 + data[player].playerHeal*0.2,
                     }
                 }
                 foundData.push(filteredData)
             }
         }
-        
+
+
         if(foundData.length > 0){
             setResult(foundData);
             setMessage('');
@@ -42,6 +46,7 @@ const Header = () => {
             setMessage('검색 결과가 없습니다. ID를 확인하세요.');
         }
     }
+
 
     return (
         <div>
