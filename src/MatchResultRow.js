@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import PlayerDetailsCard from './PlayerDetailsCard';
 import PlayerCard from './PlayerCard';
 import styled from 'styled-components';
-import MockData from './mock';
+
+const TotalContainer = styled.div`
+`
 
 const Container = styled.div`
     display: flex;
@@ -11,7 +14,7 @@ const Container = styled.div`
     border-radius: 20px;
     transition: background 0.5s ease;
 
-    background: ${props => props.$backgroundSetting(props.matchfinalresult, props.$isbuttonhovered)}
+    background: ${props => props.$backgroundSetting(props.matchfinalresult, props.$isbuttonhovered)};
 `
 
 const ShowMatchDetails = styled.button`
@@ -26,7 +29,7 @@ const ShowMatchDetails = styled.button`
 `
 
 const MatchResultRow = ({ matchInfo }) => {
-    const [open, setOpen] = useState(false);
+    const [matchDetailsOpen, setMatchDetailsOpen] = useState(false);
     const matchFinalResult = Object.values(matchInfo)[0].matchFinalResult
     const [isButtonHovered, setIsButtonHovered] = useState(false);
     
@@ -48,41 +51,83 @@ const MatchResultRow = ({ matchInfo }) => {
     }
     
     const ShowMatchDetailsButton = () => {
-        setOpen(prev => !prev);
+        setMatchDetailsOpen(prev => !prev);
     }
     
     return (
-        <Container 
-        matchfinalresult={matchFinalResult}
-        $isbuttonhovered={isButtonHovered}
-        $backgroundSetting={backgroundSetting}
-        onMouseEnter={() => setIsButtonHovered(true)}
-        onMouseLeave={() => setIsButtonHovered(false)}
-        >
-            {Object.keys(matchInfo) // ['현규', '인태', '민규'...]
-                .sort((a, b) => matchInfo[b].score - matchInfo[a].score) // ['인태', '민규', '현규' ...]
-                .map((name, index) =>  // matchInfo 는 Object이기때문에 순서가 없음.
-                <PlayerCard 
-                key={name} 
-                name={name} 
-                score={matchInfo[name].score}
-                matchfinalresult={matchInfo[name].matchFinalResult}
-                rank={index+1+'등'}
-                playerchamp={matchInfo[name].champ}
-                />)
-            }
-            <ShowMatchDetails 
-                className='showMatchDetails'
+        <TotalContainer>
+            {
+                matchDetailsOpen ? 
+                <Container 
                 matchfinalresult={matchFinalResult}
                 $isbuttonhovered={isButtonHovered}
                 $backgroundSetting={backgroundSetting}
-                onClick={ShowMatchDetailsButton}>
-                상세보기
-            </ShowMatchDetails>
-            {
-                open ? <div>빅현규 : </div> : null
+                onMouseEnter={() => setIsButtonHovered(true)}
+                onMouseLeave={() => setIsButtonHovered(false)}
+                >
+                    {Object.keys(matchInfo)
+                        .sort((a, b) => matchInfo[b].score - matchInfo[a].score)
+                        .map((name, index) =>
+                        <PlayerCard 
+                        key={name} 
+                        name={name} 
+                        score={matchInfo[name].score}
+                        matchfinalresult={matchInfo[name].matchFinalResult}
+                        rank={index+1+'등'}
+                        playerchamp={matchInfo[name].champ}
+                        />)
+                    }
+                    {Object.keys(matchInfo)
+                        .sort((a, b) => matchInfo[b].score - matchInfo[a].score) 
+                        .map((name) => 
+                        <PlayerDetailsCard 
+                        key={name} 
+                        name={name} 
+                        deal={matchInfo[name].deal}
+                        tank={matchInfo[name].tank}
+                        heal={matchInfo[name].heal}
+                        />)
+                    }
+                    <ShowMatchDetails 
+                        className='showMatchDetails'
+                        matchfinalresult={matchFinalResult}
+                        $isbuttonhovered={isButtonHovered}
+                        $backgroundSetting={backgroundSetting}
+                        onClick={ShowMatchDetailsButton}>
+                        상세보기
+                    </ShowMatchDetails>
+                </Container>
+                : 
+                <Container 
+                    matchfinalresult={matchFinalResult}
+                    $isbuttonhovered={isButtonHovered}
+                    $backgroundSetting={backgroundSetting}
+                    onMouseEnter={() => setIsButtonHovered(true)}
+                    onMouseLeave={() => setIsButtonHovered(false)}
+                >
+                    {Object.keys(matchInfo) 
+                        .sort((a, b) => matchInfo[b].score - matchInfo[a].score) 
+                        .map((name, index) =>
+                        <PlayerCard 
+                        key={name} 
+                        name={name} 
+                        score={matchInfo[name].score}
+                        matchfinalresult={matchInfo[name].matchFinalResult}
+                        rank={index+1+'등'}
+                        playerchamp={matchInfo[name].champ}
+                        />)
+                    }
+                    <ShowMatchDetails 
+                        className='showMatchDetails'
+                        matchfinalresult={matchFinalResult}
+                        $isbuttonhovered={isButtonHovered}
+                        $backgroundSetting={backgroundSetting}
+                        onClick={ShowMatchDetailsButton}>
+                        상세보기
+                    </ShowMatchDetails>
+                </Container>
             }
-        </Container>
+        </TotalContainer>
     );
 };
 
