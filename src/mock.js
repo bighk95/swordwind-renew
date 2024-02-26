@@ -7,7 +7,6 @@ const MockData = {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
                 playerChamp : 'Lillia',
-                champIcon : 'image',
                 playerDeal : 50000,
                 playerTank : 20000,
                 playerHeal : 10000,
@@ -15,8 +14,7 @@ const MockData = {
             "인태" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Hecarim',
                 playerDeal : 30000,
                 playerTank : 70000,
                 playerHeal : 20000,
@@ -24,8 +22,7 @@ const MockData = {
             "민수" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Kalista',
                 playerDeal : 20000,
                 playerTank : 110000,
                 playerHeal : 0,
@@ -33,8 +30,7 @@ const MockData = {
             "민규" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Kayn',
                 playerDeal : 10000,
                 playerTank : 20000,
                 playerHeal : 220000,
@@ -42,8 +38,7 @@ const MockData = {
             "형래" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Briar',
                 playerDeal : 20000,
                 playerTank : 100000,
                 playerHeal : 100000,
@@ -55,8 +50,7 @@ const MockData = {
             "동균" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Caitlyn',
                 playerDeal : 53000,
                 playerTank : 27000,
                 playerHeal : 12000,
@@ -64,8 +58,7 @@ const MockData = {
             "영덕" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Blitzcrank',
                 playerDeal : 32000,
                 playerTank : 30000,
                 playerHeal : 2000,
@@ -73,8 +66,7 @@ const MockData = {
             "태우" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Belveth',
                 playerDeal : 27000,
                 playerTank : 108000,
                 playerHeal : 2000,
@@ -82,8 +74,7 @@ const MockData = {
             "지웅" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Leblanc',
                 playerDeal : 11000,
                 playerTank : 8000,
                 playerHeal : 225000,
@@ -91,8 +82,7 @@ const MockData = {
             "민영" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'masterYi',
                 playerDeal : 28000,
                 playerTank : 110000,
                 playerHeal : 3000,
@@ -104,8 +94,7 @@ const MockData = {
             "현규" : {
                 matchFinalResult : 'lose',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Kogmaw',
                 playerDeal : 60000,
                 playerTank : 40000,
                 playerHeal : 6000,
@@ -113,8 +102,7 @@ const MockData = {
             "진규" : {
                 matchFinalResult : 'lose',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Ahri',
                 playerDeal : 40000,
                 playerTank : 75000,
                 playerHeal : 22000,
@@ -122,8 +110,7 @@ const MockData = {
             "찬규" : {
                 matchFinalResult : 'lose',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Annie',
                 playerDeal : 27000,
                 playerTank : 115000,
                 playerHeal : 2000,
@@ -131,8 +118,7 @@ const MockData = {
             "점숙" : {
                 matchFinalResult : 'lose',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Darius',
                 playerDeal : 10600,
                 playerTank : 22000,
                 playerHeal : 229000,
@@ -140,8 +126,7 @@ const MockData = {
             "노익" : {
                 matchFinalResult : 'lose',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Draven',
                 playerDeal : 80000,
                 playerTank : 40000,
                 playerHeal : 7000,
@@ -153,8 +138,7 @@ const MockData = {
             "현규" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Aphelios',
                 playerDeal : 55000,
                 playerTank : 29000,
                 playerHeal : 10000,
@@ -162,8 +146,7 @@ const MockData = {
             "인태" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Azir',
                 playerDeal : 32000,
                 playerTank : 77000,
                 playerHeal : 9000,
@@ -171,8 +154,7 @@ const MockData = {
             "민수" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Gnar',
                 playerDeal : 50000,
                 playerTank : 25000,
                 playerHeal : 8000,
@@ -180,8 +162,7 @@ const MockData = {
             "민규" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Jax',
                 playerDeal : 30000,
                 playerTank : 12000,
                 playerHeal : 0,
@@ -189,8 +170,7 @@ const MockData = {
             "형래" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Jhin',
                 playerDeal : 47000,
                 playerTank : 22000,
                 playerHeal : 0,
@@ -202,8 +182,7 @@ const MockData = {
             "현규" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Cassiopeia',
                 playerDeal : 55000,
                 playerTank : 82000,
                 playerHeal : 12000,
@@ -211,8 +190,7 @@ const MockData = {
             "인태" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Lucian',
                 playerDeal : 35000,
                 playerTank : 15000,
                 playerHeal : 2000,
@@ -220,8 +198,7 @@ const MockData = {
             "민수" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Karthus',
                 playerDeal : 28000,
                 playerTank : 115000,
                 playerHeal : 6000,
@@ -229,8 +206,7 @@ const MockData = {
             "민규" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Anivia',
                 playerDeal : 20000,
                 playerTank : 70000,
                 playerHeal : 5000,
@@ -238,8 +214,7 @@ const MockData = {
             "형래" : {
                 matchFinalResult : 'win',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Ekko',
                 playerDeal : 22000,
                 playerTank : 17000,
                 playerHeal : 1900,
@@ -251,8 +226,7 @@ const MockData = {
             "현규" : {
                 matchFinalResult : 'lose',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Fiora',
                 playerDeal : 58000,
                 playerTank : 22000,
                 playerHeal : 17000,
@@ -260,8 +234,7 @@ const MockData = {
             "인태" : {
                 matchFinalResult : 'lose',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Malphite',
                 playerDeal : 35000,
                 playerTank : 60000,
                 playerHeal : 6000,
@@ -269,8 +242,7 @@ const MockData = {
             "민수" : {
                 matchFinalResult : 'lose',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'missFortune',
                 playerDeal : 27000,
                 playerTank : 10000,
                 playerHeal : 0,
@@ -278,8 +250,7 @@ const MockData = {
             "민규" : {
                 matchFinalResult : 'lose',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Gangplank',
                 playerDeal : 18000,
                 playerTank : 78000,
                 playerHeal : 2000,
@@ -287,8 +258,7 @@ const MockData = {
             "형래" : {
                 matchFinalResult : 'lose',
                 playerTeam : 'A',
-                playerChamp : 'Lillia',
-                champIcon : 'image',
+                playerChamp : 'Hwei',
                 playerDeal : 26000,
                 playerTank : 60000,
                 playerHeal : 7000,
