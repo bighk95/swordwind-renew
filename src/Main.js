@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import MockData from './mock';
 import MatchResultRow from './MatchResultRow';
+import { useSearchParams } from 'react-router-dom';
 
-const Header = () => {
-  const [id, setId] = useState('');
+const Main = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [id, setId] = useState(searchParams.get('name') || '');
   const [result, setResult] = useState([]);
   const [message, setMessage] = useState('');
 
-  // let playedId = [];
-  // for(let key in MockData){
-  //     playedId = [...playedId, ...Object.keys(MockData[key][0])];
-  // }
-
   const handleSearch = (e) => {
-    e.preventDefault();
+    e?.preventDefault();
 
     let foundData = [];
     for (let key in MockData) {
@@ -30,12 +27,17 @@ const Header = () => {
             deal: data[player].playerDeal,
             tank: data[player].playerTank,
             heal: data[player].playerHeal,
-            score: data[player].playerDeal + data[player].playerTank * 0.4 + data[player].playerHeal * 0.2,
+            score:
+              data[player].playerDeal +
+              data[player].playerTank * 0.4 +
+              data[player].playerHeal * 0.2,
           };
         }
         foundData.push(filteredData);
       }
     }
+
+    setSearchParams({ name: id });
 
     if (foundData.length > 0) {
       setResult(foundData);
@@ -45,6 +47,13 @@ const Header = () => {
       setMessage('검색 결과가 없습니다. ID를 확인하세요.');
     }
   };
+
+  useEffect(() => {
+    if (id) {
+      handleSearch();
+    }
+    return () => {};
+  }, []);
 
   return (
     <div>
@@ -70,9 +79,23 @@ const Header = () => {
           {message}
         </StyledResult>
       </StyledResultContainer>
+      <StyledCopyright href="https://kr.freepik.com/search?format=search&last_filter=type&last_value=icon&query=down+arrow+&type=icon">
+        wahya 제작 아이콘
+      </StyledCopyright>
     </div>
   );
 };
+
+const StyledCopyright = styled.a`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  text-decoration: none;
+
+  &:visited {
+    color: black;
+  }
+`;
 
 const StyledTitle = styled.a`
   text-decoration-line: none;
@@ -106,4 +129,4 @@ const StyledButton = styled.button`
   margin: 0 10px 0 10px;
 `;
 
-export default Header;
+export default Main;

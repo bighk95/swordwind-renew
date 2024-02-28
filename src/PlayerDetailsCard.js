@@ -10,6 +10,10 @@ const StyledDetailsCard = styled.div`
 
   font-size: 16px;
   font-weight: bold;
+
+  & > div {
+    margin-bottom: 4px;
+  }
 `;
 
 const PlayerDetailsCard = ({ deal, tank, heal }) => {
