@@ -7,14 +7,13 @@ const StyledCard = styled.div`
   text-align: center;
   justify-content: center;
 
-  margin-bottom: 20px;
-
+  margin: 0 10px 20px 10px;
   > * {
   }
 
   .playerchamp {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
     border: 1px solid #e2e2e2;
     border-radius: 50%;
     margin: 20px 20px 8px 20px;

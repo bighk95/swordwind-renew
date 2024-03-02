@@ -25,10 +25,11 @@ const Header = ({ handleSearch, onChangeSearchInput, summonerName }) => {
 const StyledTitle = styled.a`
   text-decoration-line: none;
   color: black;
+  margin-bottom: 20px;
 `;
 
 const StyledContainer = styled.div`
-  margin-top: 30px;
+  padding-top: 30px;
   text-align: center;
 `;
 
@@ -42,13 +43,8 @@ const StyledButton = styled.button`
   text-decoration: none;
   display: inline-block;
   position: relative;
-  box-shadow: 2px 2px 2px black;
-  border: 1px solid rgba(0, 0, 0, 0.21);
-  border-bottom: 4px solid rgba(0, 0, 0, 0.21);
   border-radius: 4px;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
 
-  padding-top: 4px;
   font-size: 14px;
   height: 40px;
   width: 60px;
@@ -58,10 +54,6 @@ const StyledButton = styled.button`
 
   &:hover {
     background-color: #3e9fff;
-  }
-
-  &:active {
-    box-shadow: none;
   }
 `;
 

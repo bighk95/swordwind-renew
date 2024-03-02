@@ -1,11 +1,13 @@
 import React from 'react';
 import Header from './Header';
-import Main2 from './Main2';
+import Main2 from './Main';
 import { useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import MockData from './mock';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import MainImage from './img/riot-games-self-publish-league-legends-teamfight-tactics-southeast-asia.png';
+import NotFound from './NotFound';
 
 const Layout = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -58,45 +60,36 @@ const Layout = () => {
     return () => {};
   }, []);
 
-  useEffect(() => {
-    if (!id) {
-      navigate('/');
-    }
-    return () => {};
-  }, [id]);
-
   // result
   return (
-    <div>
+    <StyledBackground>
       <Header
         handleSearch={handleSearch}
         onChangeSearchInput={(e) => setId(e.target.value)}
         summonerName={id}
       />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <StyledMainImage
-              src={require(
-                `./img/riot-games-self-publish-league-legends-teamfight-tactics-southeast-asia.png`,
-              )}
-              alt="MainImage"
-            />
-          }
-        />
+        <Route path="/"></Route>
         <Route
           path="/search"
           element={<Main2 result={result} message={message} />}
         />
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
-    </div>
+    </StyledBackground>
   );
 };
 
-const StyledMainImage = styled.img`
-  width: 1280px;
-  height: 640px;
+const StyledBackground = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  background-image: url(${MainImage});
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 0.9;
 `;
 
 export default Layout;
