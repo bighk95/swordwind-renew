@@ -23,7 +23,7 @@ const StyledNotFound = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin: 100px;
+  margin: 80px;
 
   & > div {
     font-size: 24px;

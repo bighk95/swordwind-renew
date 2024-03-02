@@ -23,9 +23,9 @@ const Header = ({ handleSearch, onChangeSearchInput, summonerName }) => {
 };
 
 const StyledTitle = styled.a`
+  display: inline-block;
   text-decoration-line: none;
   color: black;
-  margin-bottom: 20px;
 `;
 
 const StyledContainer = styled.div`

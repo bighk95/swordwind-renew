@@ -22,7 +22,7 @@ const StyledResultContainer = styled.div`
 
 const StyledResult = styled.div`
   text-align: center;
-  margin-top: 50px;
+  margin-top: 30px;
   .message {
     font-size: 20px;
   }

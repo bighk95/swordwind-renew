@@ -17,7 +17,7 @@ function App() {
   5. 더보기 (API 연결한 후 작업할것.)
   6. 먹꾸 어케하노? (Fetch loading)
   7. 디테일 아이템 추가
-  8. notfound page
+  8. notfound page / 미완 (위에 기능 사용하지 못하도록 하고싶음.)
   9. favicon
 */
 
