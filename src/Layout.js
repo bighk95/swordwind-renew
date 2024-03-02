@@ -4,17 +4,25 @@ import Main2 from './Main';
 import { useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import MockData from './mock';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import MainImage from './img/riot-games-self-publish-league-legends-teamfight-tactics-southeast-asia.png';
 import NotFound from './NotFound';
 
 const Layout = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
   const [id, setId] = useState(searchParams.get('name') || '');
   const [result, setResult] = useState([]);
   const [message, setMessage] = useState('');
+  const [prevId, setPrevId] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setPrevId('');
+    }
+  }, [location]);
 
   const handleSearch = (e) => {
     e?.preventDefault();
@@ -42,7 +50,14 @@ const Layout = () => {
         foundData.push(filteredData);
       }
     }
-    navigate('/search?name=' + id);
+
+    setPrevId(id);
+    if (prevId !== id) {
+      navigate('/search?name=' + id);
+      setPrevId(id);
+    } else {
+      return;
+    }
 
     if (foundData.length > 0) {
       setResult(foundData);
