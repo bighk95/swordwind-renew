@@ -71,6 +71,12 @@ const Main = () => {
           <StyledButton onClick={handleSearch}>검색</StyledButton>
         </form>
       </StyledContainer>
+      <StyledMainImage
+        src={require(
+          `./img/riot-games-self-publish-league-legends-teamfight-tactics-southeast-asia.png`,
+        )}
+        alt="MainImage"
+      />
       <StyledResultContainer>
         <StyledResult>
           {result.map((data, key) => (
@@ -79,22 +85,13 @@ const Main = () => {
           {message}
         </StyledResult>
       </StyledResultContainer>
-      <StyledCopyright href="https://kr.freepik.com/search?format=search&last_filter=type&last_value=icon&query=down+arrow+&type=icon">
-        wahya 제작 아이콘
-      </StyledCopyright>
     </div>
   );
 };
 
-const StyledCopyright = styled.a`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  text-decoration: none;
-
-  &:visited {
-    color: black;
-  }
+const StyledMainImage = styled.img`
+  width: 1280px;
+  height: 640px;
 `;
 
 const StyledTitle = styled.a`
@@ -118,15 +115,36 @@ const StyledContainer = styled.div`
 `;
 
 const StyledInput = styled.input`
-  height: 30px;
+  height: 32px;
   width: 200px;
   text-align: center;
 `;
 
 const StyledButton = styled.button`
-  height: 37px;
-  width: 50px;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  box-shadow: 2px 2px 2px black;
+  border: 1px solid rgba(0, 0, 0, 0.21);
+  border-bottom: 4px solid rgba(0, 0, 0, 0.21);
+  border-radius: 4px;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+
+  padding-top: 4px;
+  font-size: 14px;
+  height: 40px;
+  width: 60px;
   margin: 0 10px 0 10px;
+  background-color: #1e90ff;
+  transition: 0.2s ease;
+
+  &:hover {
+    background-color: #3e9fff;
+  }
+
+  &:active {
+    box-shadow: none;
+  }
 `;
 
 export default Main;

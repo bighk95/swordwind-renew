@@ -128,10 +128,3 @@ const MatchResultRow = ({ matchInfo }) => {
 };
 
 export default MatchResultRow;
-
-/* 
-    1. 브라우저 라우팅
-    2. 더보기 (API 연결한 후 작업할것.)
-    3. UI 업그레이드
-    4. 디테일 아이템 추가
-*/
