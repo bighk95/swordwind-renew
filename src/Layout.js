@@ -18,8 +18,9 @@ const Layout = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  console.log(location.pathname);
   useEffect(() => {
-    if (location.pathname === '/') {
+    if (location.pathname !== '/search') {
       setPrevId('');
     }
   }, [location]);
