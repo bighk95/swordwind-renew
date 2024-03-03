@@ -8,6 +8,7 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import MainImage from './img/riot-games-self-publish-league-legends-teamfight-tactics-southeast-asia.png';
 import NotFound from './NotFound';
+import Controller from './Controller';
 
 const Layout = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,8 +18,12 @@ const Layout = () => {
   const [prevId, setPrevId] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const [isControllerOpen, setIsControllerOpen] = useState(false);
 
-  console.log(location.pathname);
+  const closeController = () => {
+    setIsControllerOpen(false);
+  };
+
   useEffect(() => {
     if (location.pathname !== '/search') {
       setPrevId('');
@@ -78,7 +83,7 @@ const Layout = () => {
 
   // result
   return (
-    <StyledBackground>
+    <StyledBackground onClick={closeController}>
       <Header
         handleSearch={handleSearch}
         onChangeSearchInput={(e) => setId(e.target.value)}
@@ -92,6 +97,16 @@ const Layout = () => {
         />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
+      {isControllerOpen && <Controller onClose={closeController} />}
+      <StyledBalanceController
+        src={require(`./img/controller3.webp`)}
+        alt="BalanceController"
+        style={{ cursor: 'pointer' }}
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsControllerOpen(!isControllerOpen);
+        }}
+      />
     </StyledBackground>
   );
 };
@@ -106,6 +121,15 @@ const StyledBackground = styled.div`
   background-repeat: no-repeat;
 
   opacity: 0.9;
+`;
+
+const StyledBalanceController = styled.img`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  width: 70px;
+  height: 91px;
 `;
 
 export default Layout;

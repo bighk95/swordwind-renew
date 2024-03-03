@@ -11,7 +11,7 @@ const Header = ({ handleSearch, onChangeSearchInput, summonerName }) => {
         <form onSubmit={handleSearch}>
           <StyledInput
             type="text"
-            placeholder="소환사 이름"
+            placeholder="소환사 이름 + #KR1"
             value={summonerName}
             onChange={onChangeSearchInput}
           ></StyledInput>
