@@ -33,58 +33,90 @@ const Layout = () => {
 
   const handleSearch = async (e) => {
     e?.preventDefault();
-    // const playerName = id.split('#')[0];
-    // const tagName = id.split('#')[1];
+    const playerName = id.split('#')[0];
+    const tagName = id.split('#')[1];
 
-    // const matchListResponse = await getMatchNumberList({
-    //   playerName,
-    //   tagName,
-    // });
-    // const matchId = matchListResponse.data.data;
-    // console.log(matchId);
-    // const detailInfo = await getMatchDetail({ matchId: matchId[0] });
-    // console.log(detailInfo);
+    const matchListResponse = await getMatchNumberList({
+      playerName,
+      tagName,
+    });
+    const matchId = matchListResponse.data.data;
+    const detailInfoResponse = await getMatchDetail({ matchId: matchId[0] });
+    const detailInfo = detailInfoResponse.data.data;
+    console.log('detailInfo', detailInfo);
 
-    let foundData = [];
-    for (let key in MockData) {
-      let data = MockData[key][0];
-      if (data[id]) {
-        let filteredData = {};
-        for (let player in data) {
-          filteredData[player] = {
-            matchFinalResult: data[player].matchFinalResult,
-            team: data[player].playerTeam,
-            champ: data[player].playerChamp,
-            champIcon: data[player].ChampIcon,
-            deal: data[player].playerDeal,
-            tank: data[player].playerTank,
-            heal: data[player].playerHeal,
-            score: Math.round(
-              data[player].playerDeal +
-                data[player].playerTank * 0.4 +
-                data[player].playerHeal * 0.2,
-            ),
-          };
-        }
-        foundData.push(filteredData);
+    const totalData = [];
+    for (let i = 0; i < matchId.length; i++) {
+      const detailInfoResponse = await getMatchDetail({ matchId: matchId[i] });
+      totalData.push(detailInfoResponse.data.data);
+    }
+    console.log('totalData', totalData);
+
+    let dataContainer = [];
+    for (let i = 0; i < totalData.length; i++) {
+      let oneMatchDataContainer = {};
+      for (let player in totalData[i]) {
+        oneMatchDataContainer[player] = {
+          matchId: totalData[i][player].matchId,
+          gameMode: totalData[i][player].gameMode,
+          playerNickname: totalData[i][player].gameName,
+          playerTagname: totalData[i][player].tagLine,
+          teamId: totalData[i][player].teamId,
+          championName: totalData[i][player].championName,
+          dealingScale: totalData[i][player].totalDamageDealtToChampions,
+          tankingScale: totalData[i][player].totalDamageTaken,
+          healingScale: totalData[i][player].totalHeal,
+          totalScoreScale: Math.round(
+            totalData[i][player].totalDamageDealtToChampions +
+              totalData[i][player].totalDamageTaken * 0.4 +
+              totalData[i][player].totalHeal * 0.2,
+          ),
+        };
       }
+      dataContainer.push(oneMatchDataContainer);
     }
+    console.log('dataContainer', dataContainer);
 
-    setPrevId(id);
-    if (prevId !== id) {
-      navigate('/search?name=' + id);
-      setPrevId(id);
-    } else {
-      return;
-    }
+    // let foundData = [];
+    // for (let key in MockData) {
+    //   let data = MockData[key][0];
+    //   if (data[id]) {
+    //     let filteredData = {};
+    //     for (let player in data) {
+    //       filteredData[player] = {
+    //         matchFinalResult: data[player].matchFinalResult,
+    //         team: data[player].playerTeam,
+    //         champ: data[player].playerChamp,
+    //         champIcon: data[player].ChampIcon,
+    //         deal: data[player].playerDeal,
+    //         tank: data[player].playerTank,
+    //         heal: data[player].playerHeal,
+    //         score: Math.round(
+    //           data[player].playerDeal +
+    //             data[player].playerTank * 0.4 +
+    //             data[player].playerHeal * 0.2,
+    //         ),
+    //       };
+    //     }
+    //     foundData.push(filteredData);
+    //   }
+    // }
 
-    if (foundData.length > 0) {
-      setResult(foundData);
-      setMessage('');
-    } else {
-      setResult([]);
-      setMessage('검색 결과가 없습니다. ID를 확인하세요.');
-    }
+    // setPrevId(id);
+    // if (prevId !== id) {
+    //   navigate('/search?name=' + id);
+    //   setPrevId(id);
+    // } else {
+    //   return;
+    // }
+
+    // if (foundData.length > 0) {
+    //   setResult(foundData);
+    //   setMessage('');
+    // } else {
+    //   setResult([]);
+    //   setMessage('검색 결과가 없습니다. ID를 확인하세요.');
+    // }
   };
 
   useEffect(() => {

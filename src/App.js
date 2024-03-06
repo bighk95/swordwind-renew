@@ -17,6 +17,8 @@ function App() {
   5. 먹꾸 어케하노? (Fetch loading) [?]
   6. 디테일 아이템 추가 [?]
   7. useQuery 업그레이드
+
+  **. MatchFinalResult 추가요청.
 */
 
 export default App;
