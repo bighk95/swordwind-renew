@@ -11,6 +11,7 @@ const Header = ({ handleSearch, onChangeSearchInput, summonerName }) => {
         <form onSubmit={handleSearch}>
           <StyledInput
             type="text"
+            name="name"
             placeholder="소환사 이름 + #KR1"
             value={summonerName}
             onChange={onChangeSearchInput}
@@ -43,7 +44,7 @@ const StyledButton = styled.button`
   text-decoration: none;
   display: inline-block;
   position: relative;
-  border-radius: 4px;
+  border-radius: 8px;
 
   font-size: 14px;
   height: 40px;

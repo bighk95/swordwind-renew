@@ -2,7 +2,7 @@ import React from 'react';
 import MatchResultRow from './MatchResultRow';
 import styled from 'styled-components';
 
-const Main2 = ({ result = [], message }) => {
+const Main = ({ result = [], message }) => {
   return (
     <StyledResultContainer>
       <StyledResult>
@@ -28,4 +28,4 @@ const StyledResult = styled.div`
   }
 `;
 
-export default Main2;
+export default Main;

@@ -16,6 +16,7 @@ function App() {
   4. 더보기 (API 연결한 후 작업할것.) [?]
   5. 먹꾸 어케하노? (Fetch loading) [?]
   6. 디테일 아이템 추가 [?]
+  7. useQuery 업그레이드
 */
 
 export default App;

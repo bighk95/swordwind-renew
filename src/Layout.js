@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './Header';
-import Main2 from './Main';
+import Main from './Main';
 import { useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import MockData from './mock';
@@ -9,7 +9,8 @@ import styled from 'styled-components';
 import MainImage from './img/riot-games-self-publish-league-legends-teamfight-tactics-southeast-asia.png';
 import NotFound from './NotFound';
 import Controller from './Controller';
-
+import getMatchNumberList from './api/getMatchNumberList';
+import getMatchDetail from './api/getMatchDetail';
 const Layout = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [id, setId] = useState(searchParams.get('name') || '');
@@ -30,8 +31,19 @@ const Layout = () => {
     }
   }, [location]);
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e?.preventDefault();
+    // const playerName = id.split('#')[0];
+    // const tagName = id.split('#')[1];
+
+    // const matchListResponse = await getMatchNumberList({
+    //   playerName,
+    //   tagName,
+    // });
+    // const matchId = matchListResponse.data.data;
+    // console.log(matchId);
+    // const detailInfo = await getMatchDetail({ matchId: matchId[0] });
+    // console.log(detailInfo);
 
     let foundData = [];
     for (let key in MockData) {
@@ -47,10 +59,11 @@ const Layout = () => {
             deal: data[player].playerDeal,
             tank: data[player].playerTank,
             heal: data[player].playerHeal,
-            score:
+            score: Math.round(
               data[player].playerDeal +
-              data[player].playerTank * 0.4 +
-              data[player].playerHeal * 0.2,
+                data[player].playerTank * 0.4 +
+                data[player].playerHeal * 0.2,
+            ),
           };
         }
         foundData.push(filteredData);
@@ -93,7 +106,7 @@ const Layout = () => {
         <Route path="/"></Route>
         <Route
           path="/search"
-          element={<Main2 result={result} message={message} />}
+          element={<Main result={result} message={message} />}
         />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
