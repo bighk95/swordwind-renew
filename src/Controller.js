@@ -3,27 +3,30 @@ import styled from 'styled-components';
 
 const Controller = ({ onClose }) => {
   return (
-    <StyledModalContainer onClick={onClose}>
-      <StyledModal onClick={(e) => e.stopPropagation()}>
-        <StyledModalTitle>유저 밸런스 패치</StyledModalTitle>
-        <StyledPatchContainer>
-          <StyledInputContainer>
-            <StyledPlayerInput placeholder="소환사 이름 + #KR1"></StyledPlayerInput>
-            <StyledPercentageInput placeholder="배율 ex) 0.8 = 점수의 80%"></StyledPercentageInput>
-          </StyledInputContainer>
-          <StyledApplyContainer>
-            <StyledApply
+    <ModalContainer onClick={onClose}>
+      <Modal onClick={(e) => e.stopPropagation()}>
+        <ModalTitle>유저 밸런스 패치</ModalTitle>
+        <PatchContainer>
+          <InputContainer>
+            <PlayerInput placeholder="소환사 이름 + #KR1"></PlayerInput>
+            <PercentageInput
+              type="number"
+              placeholder="배율 ex) 0.8 = 점수의 80%"
+            ></PercentageInput>
+          </InputContainer>
+          <ApplyContainer>
+            <Apply
               onClick={(e) => {
                 e.stopPropagation();
                 alert('패치를 적용하였습니다.');
               }}
             >
               적용
-            </StyledApply>
-          </StyledApplyContainer>
-        </StyledPatchContainer>
-        <StyledAppliedPatch></StyledAppliedPatch>
-        <StyledReset
+            </Apply>
+          </ApplyContainer>
+        </PatchContainer>
+        <AppliedPatch></AppliedPatch>
+        <Reset
           src={require(`./img/reset.png`)}
           alt="reset"
           onClick={(e) => {
@@ -33,17 +36,17 @@ const Controller = ({ onClose }) => {
             }
           }}
         />
-        <StyledExit
+        <Exit
           src={require(`./img/exit.png`)}
           alt="exit"
           onClick={onClose}
-        ></StyledExit>
-      </StyledModal>
-    </StyledModalContainer>
+        ></Exit>
+      </Modal>
+    </ModalContainer>
   );
 };
 
-const StyledModalContainer = styled.div`
+const ModalContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -56,24 +59,26 @@ const StyledModalContainer = styled.div`
   justify-content: center;
 `;
 
-const StyledModal = styled.div`
+const Modal = styled.div`
   background: white;
   padding: 20px;
   border-radius: 8px;
   max-width: 500px;
   width: 90%;
-
   max-height: 500px;
   height: 90%;
+
+  position: relative;
 `;
 
-const StyledModalTitle = styled.div`
+const ModalTitle = styled.div`
   font-size: 24px;
   font-weight: bold;
   text-align: center;
+  margin-top: 10px;
 `;
 
-const StyledPatchContainer = styled.div`
+const PatchContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -81,10 +86,15 @@ const StyledPatchContainer = styled.div`
   justify-content: center;
 `;
 
-const StyledInputContainer = styled.div`
+const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
 
+  input::-webkit-inner-spin-button {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
   & > input {
     width: 200px;
     height: 36px;
@@ -94,9 +104,9 @@ const StyledInputContainer = styled.div`
   }
 `;
 
-const StyledApplyContainer = styled.div``;
+const ApplyContainer = styled.div``;
 
-const StyledApply = styled.button`
+const Apply = styled.button`
   width: 100px;
   height: 104px;
 
@@ -105,17 +115,20 @@ const StyledApply = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
+  font-size: 18px;
+  font-weight: bold;
 `;
 
-const StyledPlayerInput = styled.input``;
-const StyledPercentageInput = styled.input``;
+const PlayerInput = styled.input``;
+const PercentageInput = styled.input``;
+const AppliedPatch = styled.div``;
 
-const StyledAppliedPatch = styled.div``;
-
-const StyledReset = styled.img`
+const Reset = styled.img`
   display: flex;
-  position: relative;
-  top: 200px;
+  position: absolute;
+  bottom: 30px;
+  left: calc(50% - 30px);
   margin: 0 auto;
 
   width: 60px;
@@ -124,14 +137,14 @@ const StyledReset = styled.img`
   justify-content: center;
   cursor: pointer;
 `;
-const StyledExit = styled.img`
+const Exit = styled.img`
   display: flex;
-  position: relative;
+  position: absolute;
   width: 36px;
   height: 36px;
   cursor: pointer;
 
-  bottom: 230px;
-  left: 460px;
+  top: 20px;
+  right: 20px;
 `;
 export default Controller;
