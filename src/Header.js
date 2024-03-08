@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Header = ({ handleSearch, onChangeSearchInput, summonerName }) => {
+const Header = ({ handleSearch, message }) => {
   return (
     <div>
       <StyledContainer>
@@ -13,11 +13,19 @@ const Header = ({ handleSearch, onChangeSearchInput, summonerName }) => {
             type="text"
             name="name"
             placeholder="소환사 이름 + #KR1"
-            value={summonerName}
-            onChange={onChangeSearchInput}
           ></StyledInput>
-          <StyledButton onClick={handleSearch}>검색</StyledButton>
+          <StyledButton type="submit">검색</StyledButton>
         </form>
+        <span
+          className="message"
+          style={{
+            display: 'inline-block',
+            marginTop: '40px',
+            fontSize: '24px',
+          }}
+        >
+          {message}
+        </span>
       </StyledContainer>
     </div>
   );

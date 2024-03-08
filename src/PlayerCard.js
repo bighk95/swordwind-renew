@@ -11,7 +11,7 @@ const StyledCard = styled.div`
   > * {
   }
 
-  .playerchamp {
+  .champ {
     width: 130px;
     height: 130px;
     border: 1px solid #e2e2e2;
@@ -34,12 +34,12 @@ const StyledCard = styled.div`
   }
 `;
 
-const PlayerCard = ({ name, score, rank, playerchamp }) => {
+const PlayerCard = ({ name, score, rank, champ }) => {
   return (
     <StyledCard>
       <img
-        className="playerchamp"
-        src={require(`./img/${playerchamp}_portrait.png`)}
+        className="champ"
+        src={`https://opgg-static.akamaized.net/meta/images/lol/14.5.1/champion/${champ}.png`}
         alt="portrait"
       />
       <div className="name">{name}</div>

@@ -3,7 +3,6 @@ import Header from './Header';
 import Main from './Main';
 import { useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import MockData from './mock';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import MainImage from './img/riot-games-self-publish-league-legends-teamfight-tactics-southeast-asia.png';
@@ -14,7 +13,7 @@ import getMatchDetail from './api/getMatchDetail';
 const Layout = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [id, setId] = useState(searchParams.get('name') || '');
-  const [result, setResult] = useState([]);
+  const [matches, setMatches] = useState([]);
   const [message, setMessage] = useState('');
   const [prevId, setPrevId] = useState(null);
   const navigate = useNavigate();
@@ -25,43 +24,47 @@ const Layout = () => {
     setIsControllerOpen(false);
   };
 
-  useEffect(() => {
-    if (location.pathname !== '/search') {
-      setPrevId('');
-    }
-  }, [location]);
-
   const handleSearch = async (e) => {
     e?.preventDefault();
-    const playerName = id.split('#')[0];
-    const tagName = id.split('#')[1];
 
-    const matchListResponse = await getMatchNumberList({
-      playerName,
-      tagName,
-    });
+    const playerName = e.target.name.value.split('#')[0];
+    const tagName = e.target.name.value.split('#')[1];
+
+    let matchListResponse;
+    try {
+      matchListResponse = await getMatchNumberList({
+        playerName,
+        tagName,
+      });
+    } catch (error) {
+      setMatches([]);
+      setMessage('검색 결과가 없습니다. ID와 Tag를 확인해주세요.');
+      return;
+    }
+
     const matchId = matchListResponse.data.data;
-    const detailInfoResponse = await getMatchDetail({ matchId: matchId[0] });
-    const detailInfo = detailInfoResponse.data.data;
-    console.log('detailInfo', detailInfo);
 
     const totalData = [];
     for (let i = 0; i < matchId.length; i++) {
-      const detailInfoResponse = await getMatchDetail({ matchId: matchId[i] });
-      totalData.push(detailInfoResponse.data.data);
+      try {
+        const detailInfoResponse = await getMatchDetail({
+          matchId: matchId[i],
+        });
+        totalData.push(detailInfoResponse.data.data);
+      } catch (error) {}
     }
-    console.log('totalData', totalData);
 
-    let dataContainer = [];
+    let foundData = [];
     for (let i = 0; i < totalData.length; i++) {
-      let oneMatchDataContainer = {};
+      let oneMatchDataContainer = [];
       for (let player in totalData[i]) {
-        oneMatchDataContainer[player] = {
+        const summonerInfo = {
           matchId: totalData[i][player].matchId,
           gameMode: totalData[i][player].gameMode,
           playerNickname: totalData[i][player].gameName,
           playerTagname: totalData[i][player].tagLine,
           teamId: totalData[i][player].teamId,
+          win: totalData[i][player].win,
           championName: totalData[i][player].championName,
           dealingScale: totalData[i][player].totalDamageDealtToChampions,
           tankingScale: totalData[i][player].totalDamageTaken,
@@ -72,73 +75,30 @@ const Layout = () => {
               totalData[i][player].totalHeal * 0.2,
           ),
         };
+        oneMatchDataContainer.push(summonerInfo);
       }
-      dataContainer.push(oneMatchDataContainer);
+      foundData.push(oneMatchDataContainer);
     }
-    console.log('dataContainer', dataContainer);
 
-    // let foundData = [];
-    // for (let key in MockData) {
-    //   let data = MockData[key][0];
-    //   if (data[id]) {
-    //     let filteredData = {};
-    //     for (let player in data) {
-    //       filteredData[player] = {
-    //         matchFinalResult: data[player].matchFinalResult,
-    //         team: data[player].playerTeam,
-    //         champ: data[player].playerChamp,
-    //         champIcon: data[player].ChampIcon,
-    //         deal: data[player].playerDeal,
-    //         tank: data[player].playerTank,
-    //         heal: data[player].playerHeal,
-    //         score: Math.round(
-    //           data[player].playerDeal +
-    //             data[player].playerTank * 0.4 +
-    //             data[player].playerHeal * 0.2,
-    //         ),
-    //       };
-    //     }
-    //     foundData.push(filteredData);
-    //   }
-    // }
+    console.log('#foundData', foundData);
 
-    // setPrevId(id);
-    // if (prevId !== id) {
-    //   navigate('/search?name=' + id);
-    //   setPrevId(id);
-    // } else {
-    //   return;
-    // }
-
-    // if (foundData.length > 0) {
-    //   setResult(foundData);
-    //   setMessage('');
-    // } else {
-    //   setResult([]);
-    //   setMessage('검색 결과가 없습니다. ID를 확인하세요.');
-    // }
+    navigate('/search?name=' + e.target.name.value);
+    setId(e.target.name.value);
+    if (foundData.length > 0) {
+      setMatches(foundData);
+      setMessage('');
+    }
   };
-
-  useEffect(() => {
-    if (id) {
-      handleSearch();
-    }
-    return () => {};
-  }, []);
 
   // result
   return (
     <StyledBackground onClick={closeController}>
-      <Header
-        handleSearch={handleSearch}
-        onChangeSearchInput={(e) => setId(e.target.value)}
-        summonerName={id}
-      />
+      <Header handleSearch={handleSearch} message={message} />
       <Routes>
         <Route path="/"></Route>
         <Route
           path="/search"
-          element={<Main result={result} message={message} />}
+          element={<Main matches={matches} message={message} myName={id} />}
         />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
@@ -178,3 +138,6 @@ const StyledBalanceController = styled.img`
 `;
 
 export default Layout;
+
+// 제작 : 조인태 , 뤼튼
+// thanks for: 현규

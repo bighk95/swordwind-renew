@@ -48,13 +48,13 @@ const ShowMatchDetails = styled.button`
   }
 `;
 
-const MatchResultRow = ({ matchInfo }) => {
+const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
   const [matchDetailsOpen, setMatchDetailsOpen] = useState(false);
-  const matchFinalResult = Object.values(matchInfo)[0].matchFinalResult;
+  const matchFinalResult = isWin;
   const [isButtonHovered, setIsButtonHovered] = useState(false);
 
   const backgroundSetting = (matchFinalResult, isButtonHovered) => {
-    if (matchFinalResult === 'win') {
+    if (matchFinalResult) {
       if (isButtonHovered) {
         return '#AEDCFA';
       } else {
@@ -73,6 +73,8 @@ const MatchResultRow = ({ matchInfo }) => {
     setMatchDetailsOpen((prev) => !prev);
   };
 
+  console.log(matchInfo);
+
   return (
     <Container
       matchfinalresult={matchFinalResult}
@@ -82,30 +84,34 @@ const MatchResultRow = ({ matchInfo }) => {
       onMouseLeave={() => setIsButtonHovered(false)}
     >
       <div className="simpleInfo">
-        {Object.keys(matchInfo)
-          .sort((a, b) => matchInfo[b].score - matchInfo[a].score)
-          .map((name, index) => (
+        {matchInfo
+          .sort((a, b) => b.totalScoreScale - a.totalScoreScale)
+          .filter((summoner) => summoner.teamId === myTeamId)
+          .map((summoner, index) => (
             <PlayerCard
-              key={name}
-              name={name}
-              score={matchInfo[name].score}
-              matchfinalresult={matchInfo[name].matchFinalResult}
+              key={index}
+              name={summoner.playerNickname}
+              score={summoner.totalScoreScale}
+              matchfinalresult={true}
               rank={index + 1 + '등'}
-              playerchamp={matchInfo[name].champ}
+              champ={summoner.championName}
             />
           ))}
       </div>
       <div className="detailInfo">
         {matchDetailsOpen &&
           Object.keys(matchInfo)
-            .sort((a, b) => matchInfo[b].score - matchInfo[a].score)
+            .sort(
+              (a, b) =>
+                matchInfo[b].totalScoreScale - matchInfo[a].totalScoreScale,
+            )
             .map((name) => (
               <PlayerDetailsCard
                 key={name}
                 name={name}
-                deal={matchInfo[name].deal}
-                tank={matchInfo[name].tank}
-                heal={matchInfo[name].heal}
+                deal={matchInfo[name].dealingScale}
+                tank={matchInfo[name].tankingScale}
+                heal={matchInfo[name].healingScale}
               />
             ))}
       </div>
