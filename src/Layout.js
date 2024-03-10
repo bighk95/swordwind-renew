@@ -138,6 +138,3 @@ const StyledBalanceController = styled.img`
 `;
 
 export default Layout;
-
-// 제작 : 조인태 , 뤼튼
-// thanks for: 현규

@@ -3,10 +3,12 @@ import MatchResultRow from './MatchResultRow';
 import styled from 'styled-components';
 
 const Main = ({ matches = [], myName }) => {
+  // console.log(matches);
   return (
     <StyledResultContainer>
       <StyledResult>
         {matches.map((match, key) => {
+          console.log(match);
           const myTeamId = match.find((item) => {
             return (
               (item.playerNickname + '#' + item.playerTagname)
@@ -16,8 +18,13 @@ const Main = ({ matches = [], myName }) => {
           })?.teamId;
 
           const isWin = match.find((item) => {
-            return item.win === true;
+            return (
+              (item.playerNickname + '#' + item.playerTagname)
+                .replaceAll(' ', '')
+                .toLowerCase() === myName
+            );
           })?.win;
+
           return (
             <MatchResultRow
               key={key}

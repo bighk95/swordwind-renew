@@ -6,10 +6,8 @@ const StyledCard = styled.div`
   flex-direction: column;
   text-align: center;
   justify-content: center;
-
-  margin: 0 10px 20px 10px;
-  > * {
-  }
+  align-items: center;
+  margin: 0 20px 20px 20px;
 
   .champ {
     width: 130px;
@@ -22,6 +20,7 @@ const StyledCard = styled.div`
 
   .name {
     font-size: 20px;
+    width: 150px;
   }
 
   .score {

@@ -50,8 +50,8 @@ const ShowMatchDetails = styled.button`
 
 const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
   const [matchDetailsOpen, setMatchDetailsOpen] = useState(false);
-  const matchFinalResult = isWin;
   const [isButtonHovered, setIsButtonHovered] = useState(false);
+  const matchFinalResult = isWin;
 
   const backgroundSetting = (matchFinalResult, isButtonHovered) => {
     if (matchFinalResult) {
@@ -73,7 +73,7 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
     setMatchDetailsOpen((prev) => !prev);
   };
 
-  console.log(matchInfo);
+  // console.log(matchInfo);
 
   return (
     <Container
