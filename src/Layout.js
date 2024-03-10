@@ -80,7 +80,7 @@ const Layout = () => {
       foundData.push(oneMatchDataContainer);
     }
 
-    console.log('#foundData', foundData);
+    // console.log('#foundData', foundData);
 
     navigate('/search?name=' + e.target.name.value);
     setId(e.target.name.value);

@@ -8,7 +8,7 @@ const Main = ({ matches = [], myName }) => {
     <StyledResultContainer>
       <StyledResult>
         {matches.map((match, key) => {
-          console.log(match);
+          // console.log(match);
           const myTeamId = match.find((item) => {
             return (
               (item.playerNickname + '#' + item.playerTagname)
