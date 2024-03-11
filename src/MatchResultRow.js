@@ -74,6 +74,7 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
   };
 
   // console.log(matchInfo);
+  console.log(matchInfo);
 
   return (
     <Container
@@ -100,18 +101,16 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
       </div>
       <div className="detailInfo">
         {matchDetailsOpen &&
-          Object.keys(matchInfo)
-            .sort(
-              (a, b) =>
-                matchInfo[b].totalScoreScale - matchInfo[a].totalScoreScale,
-            )
-            .map((name) => (
+          matchInfo
+            .sort((a, b) => b.totalScoreScale - a.totalScoreScale)
+            .filter((summoner) => summoner.teamId === myTeamId)
+            .map((name, index) => (
               <PlayerDetailsCard
-                key={name}
+                key={index}
                 name={name}
-                deal={matchInfo[name].dealingScale}
-                tank={matchInfo[name].tankingScale}
-                heal={matchInfo[name].healingScale}
+                deal={name.dealingScale}
+                tank={name.tankingScale}
+                heal={name.healingScale}
               />
             ))}
       </div>

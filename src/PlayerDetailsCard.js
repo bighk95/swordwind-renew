@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StyledDetailsCard = styled.div`
   width: 120px;
-  margin: 0 35px 10px 35px;
+  margin: 0 46px 10px 46px;
   display: flex;
   flex-direction: column;
   justify-content: center;
