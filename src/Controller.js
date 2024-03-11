@@ -121,6 +121,7 @@ const Controller = ({ onClose }) => {
             e.stopPropagation();
             if (window.confirm('모든 패치를 초기화하시겠습니까?')) {
               alert('모든 패치를 초기화하였습니다.');
+              setAppliedPatch([]);
             }
           }}
         />
