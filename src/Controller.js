@@ -6,13 +6,22 @@ const Controller = ({ onClose }) => {
   const [targetPercentage, setTargetPercentage] = useState('');
   const [appliedPatch, setAppliedPatch] = useState([]);
   const apply = () => {
-    setAppliedPatch([
-      ...appliedPatch,
-      { id: targetId, percentage: targetPercentage },
-    ]);
+    const isAlreadyPatched = appliedPatch.some(
+      (patch) => patch.id === targetId,
+    );
+
+    if (isAlreadyPatched) {
+      alert('이미 해당 소환사에 대한 패치가 적용중입니다.');
+    } else {
+      setAppliedPatch([
+        ...appliedPatch,
+        { id: targetId, percentage: targetPercentage },
+      ]);
+    }
 
     setTargetId('');
     setTargetPercentage('');
+    console.log(appliedPatch[0]);
   };
 
   const handleInputId = (e) => {
@@ -233,7 +242,7 @@ const PlayerInput = styled.input`
   margin: 10px;
   font-size: 16px;
 
-  border: 1px solid rgb(51, 51, 51);
+  border: 1px solid #79cfef;
   border-top: none;
   border-right: none;
   border-left: none;
@@ -246,7 +255,7 @@ const PercentageInput = styled.input`
   margin: 10px;
   font-size: 16px;
 
-  border: 1px solid rgb(51, 51, 51);
+  border: 1px solid #79cfef;
   border-top: none;
   border-right: none;
   border-left: none;

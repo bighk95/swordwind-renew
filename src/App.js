@@ -19,6 +19,10 @@ function App() {
   7. useQuery 업그레이드
 
   **. penalty, advanatge에도 id값 validation 있어야 할까?
+  **. tag 없을때의 validation err
+  **. appliedPatch.length 기준 초과시 적용 안되게 하고싶음.
+  **. 이미 적용된 패치가 있을시에 중복 불가능.
+  **. 왜 map 을 썼는데, = > {} 이 아닌 => () 을 써야하는가?
 */
 
 export default App;
