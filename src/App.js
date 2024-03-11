@@ -18,7 +18,7 @@ function App() {
   6. 디테일 아이템 추가 [?]
   7. useQuery 업그레이드
 
-  **. MatchFinalResult 추가요청.
+  **. penalty, advanatge에도 id값 validation 있어야 할까?
 */
 
 export default App;

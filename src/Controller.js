@@ -4,23 +4,15 @@ import styled from 'styled-components';
 const Controller = ({ onClose }) => {
   const [targetId, setTargetId] = useState('');
   const [targetPercentage, setTargetPercentage] = useState('');
-  const [renderAppliedId, setRenderAppliedId] = useState('');
-  const [renderAppliedPercentage, setRenderAppliedPercentage] = useState('');
-
+  const [appliedPatch, setAppliedPatch] = useState([]);
   const apply = () => {
-    setRenderAppliedId(targetId);
-    setRenderAppliedPercentage(targetPercentage);
+    setAppliedPatch([
+      ...appliedPatch,
+      { id: targetId, percentage: targetPercentage },
+    ]);
 
     setTargetId('');
     setTargetPercentage('');
-
-    return (
-      <div className="appliedInfoContainer">
-        <div className="id">{renderAppliedId}</div>
-        <div className="percentage">{renderAppliedPercentage}</div>
-        <img src={require(`./img/exit.png`)} alt="deleteAppliedPatch"></img>
-      </div>
-    );
   };
 
   const handleInputId = (e) => {
@@ -29,7 +21,7 @@ const Controller = ({ onClose }) => {
   };
 
   const handleInputPercentage = (e) => {
-    const inputPercentage = e.taget.value;
+    const inputPercentage = e.target.value;
     setTargetPercentage(inputPercentage);
   };
 
@@ -43,6 +35,7 @@ const Controller = ({ onClose }) => {
               <Title1>이름</Title1>
               <PlayerInput
                 placeholder="소환사 이름 + #KR1"
+                value={targetId}
                 onChange={handleInputId}
               ></PlayerInput>
             </FirstTitleContainer>
@@ -51,6 +44,7 @@ const Controller = ({ onClose }) => {
               <PercentageInput
                 type="number"
                 placeholder="배율 ex) 0.8 = 점수의 80%"
+                value={targetPercentage}
                 onChange={handleInputPercentage}
               ></PercentageInput>
             </SecondTitleContainer>
@@ -66,14 +60,59 @@ const Controller = ({ onClose }) => {
         </PatchContainer>
         <AppliedPatchContainer>
           <AppliedPatch>적용된 패치</AppliedPatch>
-          <IndivController>
-            <AppliedId>홍길동</AppliedId>
-            <AppliedPercentage>0.8</AppliedPercentage>
-            <DeleteAppliedPatch
-              src={require(`./img/exit.png`)}
-              alt="deleteAppliedPatch"
-            ></DeleteAppliedPatch>
-          </IndivController>
+          <SubjectContainer>
+            <Subject1>소환사 닉네임</Subject1>
+            <Subject2>패치 비율</Subject2>
+          </SubjectContainer>
+          {appliedPatch.map((patch, index) =>
+            patch.id.includes('#') ? (
+              patch.percentage >= 1 ? (
+                <IndivController key={index}>
+                  <img src={require(`./img/check.webp`)} alt="list" />
+                  <IndivContainer>
+                    <AppliedId>{patch.id}</AppliedId>
+                    <AppliedPercentage>
+                      {Number(patch.percentage)}
+                    </AppliedPercentage>
+                    <img
+                      src={require(`./img/scaleUpArrow.png`)}
+                      alt="scaleUpArrow"
+                      style={{ width: '20px', height: '20px' }}
+                    />
+                    <DeleteAppliedPatch
+                      src={require(`./img/exit.png`)}
+                      alt="deleteAppliedPatch"
+                    ></DeleteAppliedPatch>
+                  </IndivContainer>
+                </IndivController>
+              ) : (
+                <IndivController key={index}>
+                  <img
+                    src={require(`./img/check.webp`)}
+                    alt="list"
+                    style={{ width: '20px', height: '20px' }}
+                  />
+                  <IndivContainer>
+                    <AppliedId>{patch.id}</AppliedId>
+                    <AppliedPercentage>
+                      {Number(patch.percentage)}
+                    </AppliedPercentage>
+                    <img
+                      src={require(`./img/scaleDownArrow.png`)}
+                      alt="scaleDownArrow"
+                      style={{ width: '20px', height: '20px' }}
+                    />
+                    <DeleteAppliedPatch
+                      src={require(`./img/exit.png`)}
+                      alt="deleteAppliedPatch"
+                    ></DeleteAppliedPatch>
+                  </IndivContainer>
+                </IndivController>
+              )
+            ) : (
+              alert('태그를 입력해주세요')
+            ),
+          )}
         </AppliedPatchContainer>
         <Reset
           src={require(`./img/reset.png`)}
@@ -215,6 +254,30 @@ const PercentageInput = styled.input`
 
 const AppliedPatchContainer = styled.div``;
 
+const SubjectContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+`;
+
+const Subject1 = styled.div`
+  display: flex;
+  position: relative;
+  right: 15px;
+
+  font-size: 20px;
+  font-weight: bold;
+`;
+
+const Subject2 = styled.div`
+  display: flex;
+  position: relative;
+  right: 115px;
+
+  font-size: 20px;
+  font-weight: bold;
+`;
+
 const AppliedPatch = styled.div`
   font-weight: bold;
   font-size: 24px;
@@ -223,13 +286,37 @@ const AppliedPatch = styled.div`
 
 const IndivController = styled.div`
   display: flex;
-
+  justify-content: flex-start;
+  align-items: center;
   margin-left: 50px;
+
+  & > img {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
-const AppliedId = styled.div``;
+const IndivContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 400px;
+  padding: 10px;
+`;
 
-const AppliedPercentage = styled.div``;
+const AppliedId = styled.div`
+  display: flex;
+  margin: 5px 10px 0 10px;
+  text-align: left;
+  width: 150px;
+`;
+
+const AppliedPercentage = styled.div`
+  display: flex;
+  margin: 5px 10px 0 10px;
+  text-align: left;
+  width: 20px;
+`;
 
 const DeleteAppliedPatch = styled.img`
   width: 20px;
