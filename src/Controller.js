@@ -1,10 +1,22 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Controller = ({ onClose }) => {
   const [targetId, setTargetId] = useState('');
   const [targetPercentage, setTargetPercentage] = useState('');
   const [appliedPatch, setAppliedPatch] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [showTooltipAtPlayerInput, setShowTooltipAtPlayerInput] =
+    useState(false);
+  const [showTooltipAtPercentageInput, setShowTooltipAtPercentageInput] =
+    useState(false);
+  const [showTooltipAtApplyButton, setShowTooltipAtApplyButton] =
+    useState(false);
+
+  useEffect(() => {
+    appliedPatch.length >= 5 ? setIsDisabled(true) : setIsDisabled(false);
+  }, [appliedPatch]);
+
   const apply = () => {
     const isAlreadyPatched = appliedPatch.some(
       (patch) => patch.id.replaceAll(' ', '') === targetId.replaceAll(' ', ''),
@@ -36,6 +48,37 @@ const Controller = ({ onClose }) => {
     setTargetPercentage(inputPercentage);
   };
 
+  // Tooltip
+
+  const mouseEnterInDisabledAtPlayerInput = () => {
+    if (isDisabled) {
+      setShowTooltipAtPlayerInput(true);
+    }
+  };
+
+  const mouseLeaveInDisabledAtPlayerInput = () => {
+    setShowTooltipAtPlayerInput(false);
+  };
+
+  const mouseEnterInDisabledAtPercentageInput = () => {
+    if (isDisabled) {
+      setShowTooltipAtPercentageInput(true);
+    }
+  };
+
+  const mouseLeaveInDisabledAtPercentageInput = () => {
+    setShowTooltipAtPercentageInput(false);
+  };
+
+  const mouseEnterInDisabledAtApplyButton = () => {
+    if (isDisabled) {
+      setShowTooltipAtApplyButton(true);
+    }
+  };
+
+  const mouseLeaveInDisabledAtApplyButton = () => {
+    setShowTooltipAtApplyButton(false);
+  };
   return (
     <ModalContainer onClick={onClose}>
       <Modal onClick={(e) => e.stopPropagation()}>
@@ -44,31 +87,61 @@ const Controller = ({ onClose }) => {
           <InputContainer>
             <FirstTitleContainer>
               <Title1>이름</Title1>
-              <PlayerInput
-                placeholder="소환사 이름 + #KR1"
-                value={targetId}
-                onChange={handleInputId}
-              ></PlayerInput>
+              <div
+                onMouseEnter={mouseEnterInDisabledAtPlayerInput}
+                onMouseLeave={mouseLeaveInDisabledAtPlayerInput}
+              >
+                <PlayerInput
+                  placeholder="소환사 이름 + #KR1"
+                  value={targetId}
+                  onChange={handleInputId}
+                  disabled={isDisabled}
+                ></PlayerInput>
+                {showTooltipAtPlayerInput && isDisabled && (
+                  <Tooltip>패치리스트를 더 이상 등록할 수 없습니다.</Tooltip>
+                )}
+              </div>
             </FirstTitleContainer>
             <SecondTitleContainer>
               <Title2>밸런스</Title2>
-              <PercentageInput
-                type="number"
-                placeholder="배율 ex) 0.8 = 점수의 80%"
-                value={targetPercentage}
-                onChange={handleInputPercentage}
-              ></PercentageInput>
+              <div
+                onMouseEnter={mouseEnterInDisabledAtPercentageInput}
+                onMouseLeave={mouseLeaveInDisabledAtPercentageInput}
+              >
+                <PercentageInput
+                  type="number"
+                  placeholder="배율 ex) 0.8 = 점수의 80%"
+                  value={targetPercentage}
+                  onChange={handleInputPercentage}
+                  disabled={isDisabled}
+                ></PercentageInput>
+                {showTooltipAtPercentageInput && isDisabled && (
+                  <Tooltip>패치리스트를 더 이상 등록할 수 없습니다.</Tooltip>
+                )}
+              </div>
             </SecondTitleContainer>
           </InputContainer>
-          <Apply
-            onClick={(e) => {
-              e.stopPropagation();
-              apply();
-              console.log(appliedPatch);
-            }}
+          <div
+            onMouseEnter={mouseEnterInDisabledAtApplyButton}
+            onMouseLeave={mouseLeaveInDisabledAtApplyButton}
           >
-            적용
-          </Apply>
+            <Apply
+              onClick={(e) => {
+                e.stopPropagation();
+                apply();
+                console.log(appliedPatch);
+              }}
+              disabled={isDisabled}
+              title={
+                isDisabled ? '패치리스트를 더이상 등록할 수 없습니다.' : ''
+              }
+            >
+              적용
+            </Apply>
+            {showTooltipAtApplyButton && isDisabled && (
+              <Tooltip>패치리스트를 더 이상 등록할 수 없습니다.</Tooltip>
+            )}
+          </div>
         </PatchContainer>
         <AppliedPatchContainer>
           <AppliedPatch>적용된 패치</AppliedPatch>
@@ -217,6 +290,11 @@ const Apply = styled.button`
 
   font-size: 18px;
   font-weight: bold;
+
+  &:disabled {
+    background-color: #8c8c8c;
+    cursor: not-allowed;
+  }
 `;
 
 const PlayerInput = styled.input`
@@ -231,6 +309,12 @@ const PlayerInput = styled.input`
   border-right: none;
   border-left: none;
   outline: none;
+
+  &:disabled {
+    background-color: #8c8c8c;
+    cursor: not-allowed;
+    border-radius: 8px;
+  }
 `;
 const PercentageInput = styled.input`
   width: 200px;
@@ -244,6 +328,12 @@ const PercentageInput = styled.input`
   border-right: none;
   border-left: none;
   outline: none;
+
+  &:disabled {
+    background-color: #8c8c8c;
+    cursor: not-allowed;
+    border-radius: 8px;
+  }
 `;
 
 const AppliedPatchContainer = styled.div``;
@@ -341,4 +431,14 @@ const Exit = styled.img`
   top: 20px;
   right: 20px;
 `;
+
+const Tooltip = styled.div`
+  position: absolute;
+  z-index: 1;
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+`;
+
 export default Controller;
