@@ -7,7 +7,7 @@ const Controller = ({ onClose }) => {
   const [appliedPatch, setAppliedPatch] = useState([]);
   const apply = () => {
     const isAlreadyPatched = appliedPatch.some(
-      (patch) => patch.id === targetId,
+      (patch) => patch.id.replaceAll(' ', '') === targetId.replaceAll(' ', ''),
     );
 
     if (isAlreadyPatched) {
@@ -73,7 +73,7 @@ const Controller = ({ onClose }) => {
             <Subject1>소환사 닉네임</Subject1>
             <Subject2>패치 비율</Subject2>
           </SubjectContainer>
-          {appliedPatch.map((patch, index) =>
+          {/* {appliedPatch.map((patch, index) =>
             patch.id.includes('#') ? (
               patch.percentage >= 1 ? (
                 <IndivController key={index}>
@@ -121,7 +121,39 @@ const Controller = ({ onClose }) => {
             ) : (
               alert('태그를 입력해주세요')
             ),
-          )}
+          )} */}
+          {appliedPatch.map((patch, index) => {
+            return patch.id.includes('#') ? (
+              <IndivController key={index}>
+                <img src={require(`./img/check.webp`)} alt="list" />
+                <IndivContainer>
+                  <AppliedId>{patch.id}</AppliedId>
+                  <AppliedPercentage>
+                    {Number(patch.percentage)}
+                  </AppliedPercentage>
+                  {patch.percentage >= 1 ? (
+                    <img
+                      src={require(`./img/scaleUpArrow.png`)}
+                      alt="scaleUpArrow"
+                      style={{ width: '20px', height: '20px' }}
+                    />
+                  ) : (
+                    <img
+                      src={require(`./img/scaleDownArrow.png`)}
+                      alt="scaleDownArrow"
+                      style={{ width: '20px', height: '20px' }}
+                    />
+                  )}
+                  <DeleteAppliedPatch
+                    src={require(`./img/exit.png`)}
+                    alt="deleteAppliedPatch"
+                  ></DeleteAppliedPatch>
+                </IndivContainer>
+              </IndivController>
+            ) : (
+              alert('태그를 입력해주세요.')
+            );
+          })}
         </AppliedPatchContainer>
         <Reset
           src={require(`./img/reset.png`)}
