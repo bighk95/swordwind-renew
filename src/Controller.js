@@ -10,8 +10,11 @@ const Controller = ({ onClose }) => {
       (patch) => patch.id.replaceAll(' ', '') === targetId.replaceAll(' ', ''),
     );
 
+    // validation
     if (isAlreadyPatched) {
-      alert('이미 해당 소환사에 대한 패치가 적용중입니다.');
+      alert('이미 해당 소환사에 대한  패치가 적용중입니다.');
+    } else if (!targetId.replaceAll(' ', '').includes('#')) {
+      alert('태그를 입력해주세요.');
     } else {
       setAppliedPatch([
         ...appliedPatch,
@@ -21,7 +24,6 @@ const Controller = ({ onClose }) => {
 
     setTargetId('');
     setTargetPercentage('');
-    console.log(appliedPatch[0]);
   };
 
   const handleInputId = (e) => {
@@ -62,6 +64,7 @@ const Controller = ({ onClose }) => {
             onClick={(e) => {
               e.stopPropagation();
               apply();
+              console.log(appliedPatch);
             }}
           >
             적용
@@ -73,57 +76,8 @@ const Controller = ({ onClose }) => {
             <Subject1>소환사 닉네임</Subject1>
             <Subject2>패치 비율</Subject2>
           </SubjectContainer>
-          {/* {appliedPatch.map((patch, index) =>
-            patch.id.includes('#') ? (
-              patch.percentage >= 1 ? (
-                <IndivController key={index}>
-                  <img src={require(`./img/check.webp`)} alt="list" />
-                  <IndivContainer>
-                    <AppliedId>{patch.id}</AppliedId>
-                    <AppliedPercentage>
-                      {Number(patch.percentage)}
-                    </AppliedPercentage>
-                    <img
-                      src={require(`./img/scaleUpArrow.png`)}
-                      alt="scaleUpArrow"
-                      style={{ width: '20px', height: '20px' }}
-                    />
-                    <DeleteAppliedPatch
-                      src={require(`./img/exit.png`)}
-                      alt="deleteAppliedPatch"
-                    ></DeleteAppliedPatch>
-                  </IndivContainer>
-                </IndivController>
-              ) : (
-                <IndivController key={index}>
-                  <img
-                    src={require(`./img/check.webp`)}
-                    alt="list"
-                    style={{ width: '20px', height: '20px' }}
-                  />
-                  <IndivContainer>
-                    <AppliedId>{patch.id}</AppliedId>
-                    <AppliedPercentage>
-                      {Number(patch.percentage)}
-                    </AppliedPercentage>
-                    <img
-                      src={require(`./img/scaleDownArrow.png`)}
-                      alt="scaleDownArrow"
-                      style={{ width: '20px', height: '20px' }}
-                    />
-                    <DeleteAppliedPatch
-                      src={require(`./img/exit.png`)}
-                      alt="deleteAppliedPatch"
-                    ></DeleteAppliedPatch>
-                  </IndivContainer>
-                </IndivController>
-              )
-            ) : (
-              alert('태그를 입력해주세요')
-            ),
-          )} */}
           {appliedPatch.map((patch, index) => {
-            return patch.id.includes('#') ? (
+            return (
               <IndivController key={index}>
                 <img src={require(`./img/check.webp`)} alt="list" />
                 <IndivContainer>
@@ -150,8 +104,6 @@ const Controller = ({ onClose }) => {
                   ></DeleteAppliedPatch>
                 </IndivContainer>
               </IndivController>
-            ) : (
-              alert('태그를 입력해주세요.')
             );
           })}
         </AppliedPatchContainer>
