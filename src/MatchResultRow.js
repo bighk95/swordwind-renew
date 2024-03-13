@@ -114,20 +114,22 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
               />
             ))}
       </div>
-      <ShowMatchDetails
-        className="showMatchDetails"
-        matchfinalresult={matchFinalResult}
-        $isbuttonhovered={isButtonHovered}
-        $backgroundSetting={backgroundSetting}
-        onClick={ShowMatchDetailsButton}
-        $matchdetailsopen={matchDetailsOpen}
-      >
-        <img
-          className="arrow"
-          src={require(`./img/downArrow.png`)}
-          alt="detailButton"
-        />
-      </ShowMatchDetails>
+      {matchInfo && (
+        <ShowMatchDetails
+          className="showMatchDetails"
+          matchfinalresult={matchFinalResult}
+          $isbuttonhovered={isButtonHovered}
+          $backgroundSetting={backgroundSetting}
+          onClick={ShowMatchDetailsButton}
+          $matchdetailsopen={matchDetailsOpen}
+        >
+          <img
+            className="arrow"
+            src={require(`./img/downArrow.png`)}
+            alt="detailButton"
+          />
+        </ShowMatchDetails>
+      )}
     </Container>
   );
 };
