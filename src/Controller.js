@@ -4,7 +4,13 @@ import styled from 'styled-components';
 const Controller = ({ onClose }) => {
   const [targetId, setTargetId] = useState('');
   const [targetPercentage, setTargetPercentage] = useState('');
+  const [targetKey, setTargetKey] = useState(0);
   const [appliedPatch, setAppliedPatch] = useState([]);
+
+  useEffect(() => {
+    console.log(appliedPatch);
+  }, [appliedPatch]);
+
   const [isDisabled, setIsDisabled] = useState(false);
   const [showTooltipAtPlayerInput, setShowTooltipAtPlayerInput] =
     useState(false);
@@ -28,9 +34,10 @@ const Controller = ({ onClose }) => {
     } else if (!targetId.replaceAll(' ', '').includes('#')) {
       alert('태그를 입력해주세요.');
     } else {
+      setTargetKey(targetKey + 1);
       setAppliedPatch([
         ...appliedPatch,
-        { id: targetId, percentage: targetPercentage },
+        { id: targetId, percentage: targetPercentage, key: targetKey },
       ]);
     }
 
@@ -48,6 +55,10 @@ const Controller = ({ onClose }) => {
     setTargetPercentage(inputPercentage);
   };
 
+  const handleDeletePatch = (index) => {
+    const newAppliedPatch = appliedPatch.filter((_, i) => i !== index);
+    setAppliedPatch(newAppliedPatch);
+  };
   // Tooltip
 
   const mouseEnterInDisabledAtPlayerInput = () => {
@@ -174,6 +185,9 @@ const Controller = ({ onClose }) => {
                   <DeleteAppliedPatch
                     src={require(`./img/exit.png`)}
                     alt="deleteAppliedPatch"
+                    onClick={() => {
+                      handleDeletePatch(index);
+                    }}
                   ></DeleteAppliedPatch>
                 </IndivContainer>
               </IndivController>
@@ -188,6 +202,7 @@ const Controller = ({ onClose }) => {
             if (window.confirm('모든 패치를 초기화하시겠습니까?')) {
               alert('모든 패치를 초기화하였습니다.');
               setAppliedPatch([]);
+              setTargetKey(0);
             }
           }}
         />
