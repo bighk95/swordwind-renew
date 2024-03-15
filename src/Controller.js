@@ -28,17 +28,30 @@ const Controller = ({ onClose }) => {
       (patch) => patch.id.replaceAll(' ', '') === targetId.replaceAll(' ', ''),
     );
 
-    // validation
-    if (isAlreadyPatched) {
-      alert('이미 해당 소환사에 대한  패치가 적용중입니다.');
-    } else if (!targetId.replaceAll(' ', '').includes('#')) {
-      alert('태그를 입력해주세요.');
+    const isValidIdRegx =
+      /^[a-zA-Z0-9가-힣\u3400-\u4DBF\u4E00-\u9FFF\u20000-\u2A6DF\u3040-\u309F\u30A0-\u30FF]+#[a-zA-Z0-9가-힣\u3400-\u4DBF\u4E00-\u9FFF\u20000-\u2A6DF\u3040-\u309F\u30A0-\u30FF]+$/;
+
+    // validation, setAppliedPatch
+    if (isValidIdRegx.test(targetId)) {
+      if (isAlreadyPatched) {
+        alert('이미 해당 소환사에 대한  패치가 적용중입니다.');
+      } else {
+        setTargetKey(targetKey + 1);
+
+        setAppliedPatch([
+          ...appliedPatch,
+          { id: targetId, percentage: targetPercentage, key: targetKey },
+        ]);
+      }
     } else {
-      setTargetKey(targetKey + 1);
-      setAppliedPatch([
-        ...appliedPatch,
-        { id: targetId, percentage: targetPercentage, key: targetKey },
-      ]);
+      if (
+        !targetId.replaceAll(' ', '').includes('#') ||
+        targetId.split('#')[1] === ''
+      ) {
+        alert('소환사 태그를 입력해주세요.');
+      } else {
+        alert('소환사 닉네임 또는 소환사 태그에 부적절한 문자가 있습니다.');
+      }
     }
 
     setTargetId('');
@@ -165,7 +178,9 @@ const Controller = ({ onClose }) => {
               <IndivController key={index}>
                 <img src={require(`./img/check.webp`)} alt="list" />
                 <IndivContainer>
-                  <AppliedId>{patch.id}</AppliedId>
+                  <AppliedIdContainer>
+                    <AppliedId>{patch.id}</AppliedId>
+                  </AppliedIdContainer>
                   <AppliedPercentage>
                     {Number(patch.percentage)}
                   </AppliedPercentage>
@@ -403,11 +418,18 @@ const IndivContainer = styled.div`
   padding: 10px;
 `;
 
-const AppliedId = styled.div`
+const AppliedIdContainer = styled.div`
   display: flex;
   margin: 5px 10px 0 10px;
   text-align: left;
   width: 150px;
+`;
+
+const AppliedId = styled.div`
+  width: 100%;
+  max-width: 100%;
+  word-wrap: break-word;
+  white-space: normal;
 `;
 
 const AppliedPercentage = styled.div`
