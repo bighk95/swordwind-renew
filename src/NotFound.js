@@ -1,29 +1,40 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-
+import Img from './img/img';
 const NotFound = () => {
   const navigate = useNavigate();
   return (
-    <StyledNotFound>
-      <div>현재 요청하신 페이지를 찾을 수 없습니다.</div>
-      <div>페이지가 존재하지 않거나, 사용할 수 없는 페이지입니다.</div>
-      <div>입력하신 주소가 정확한지 다시 한 번 확인해주세요.</div>
-      <button
-        onClick={() => {
-          navigate('/');
-        }}
-      >
-        Home
-      </button>
-    </StyledNotFound>
+    <div>
+      <BeeSadEmote src={Img.BeeSadEmote} />
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <NotFounded>
+          <div>현재 요청하신 페이지를 찾을 수 없습니다.</div>
+          <div>페이지가 존재하지 않거나, 사용할 수 없는 페이지입니다.</div>
+          <div>입력하신 주소가 정확한지 다시 한 번 확인해주세요.</div>
+          <button
+            onClick={() => {
+              navigate('/');
+            }}
+          >
+            Home
+          </button>
+        </NotFounded>
+      </div>
+    </div>
   );
 };
 
-const StyledNotFound = styled.div`
+const NotFounded = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin: 80px;
+  justify-content: center;
+  padding: 20px;
+  background-color: white;
+  width: 650px;
+  height: 250px;
+
+  border-radius: 16px;
 
   & > div {
     font-size: 24px;
@@ -47,6 +58,19 @@ const StyledNotFound = styled.div`
       background-color: #c5c5c5;
     }
   }
+`;
+
+const BeeSadEmote = styled.img`
+  display: flex;
+  position: relative;
+
+  top: -20px;
+  left: 100px;
+
+  width: 120px;
+  height: 120px;
+
+  transform: rotate(-45deg);
 `;
 
 export default NotFound;
