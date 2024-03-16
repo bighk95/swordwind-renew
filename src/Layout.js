@@ -107,7 +107,7 @@ const Layout = () => {
       </Routes>
       {isControllerOpen && <Controller onClose={closeController} />}
       <StyledBalanceController
-        src={Img.controller3}
+        src={Img.ModalController}
         alt="BalanceController"
         style={{ cursor: 'pointer' }}
         onClick={(e) => {
