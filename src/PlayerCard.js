@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Img from './img/img.js';
 
 const StyledCard = styled.div`
   display: flex;
@@ -34,18 +35,29 @@ const StyledCard = styled.div`
 `;
 
 const PlayerCard = ({ name, score, rank, champ }) => {
-  return (
-    <StyledCard>
-      <img
-        className="champ"
-        src={`https://opgg-static.akamaized.net/meta/images/lol/14.5.1/champion/${champ}.png`}
-        alt="portrait"
-      />
-      <div className="name">{name}</div>
-      <div className="score">{score}</div>
-      <div className="rank">{rank}</div>
-    </StyledCard>
-  );
+  if (champ === 'FiddleSticks') {
+    return (
+      <StyledCard>
+        <img className="champ" src={Img.Fiddlesticks} alt="portrait" />
+        <div className="name">{name}</div>
+        <div className="score">{score}</div>
+        <div className="rank">{rank}</div>
+      </StyledCard>
+    );
+  } else {
+    return (
+      <StyledCard>
+        <img
+          className="champ"
+          src={`https://opgg-static.akamaized.net/meta/images/lol/14.5.1/champion/${champ}.png`}
+          alt="portrait"
+        />
+        <div className="name">{name}</div>
+        <div className="score">{score}</div>
+        <div className="rank">{rank}</div>
+      </StyledCard>
+    );
+  }
 };
 
 export default PlayerCard;
