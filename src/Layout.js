@@ -10,6 +10,8 @@ import NotFound from './NotFound';
 import Controller from './Controller';
 import getMatchNumberList from './api/getMatchNumberList';
 import getMatchDetail from './api/getMatchDetail';
+import Img from './img/img.js';
+
 const Layout = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [id, setId] = useState(searchParams.get('name') || '');
@@ -87,6 +89,7 @@ const Layout = () => {
     if (foundData.length > 0) {
       setMatches(foundData);
       setMessage('');
+      console.log(matches);
     }
   };
 
@@ -104,7 +107,7 @@ const Layout = () => {
       </Routes>
       {isControllerOpen && <Controller onClose={closeController} />}
       <StyledBalanceController
-        src={require(`./img/controller3.webp`)}
+        src={Img.controller3}
         alt="BalanceController"
         style={{ cursor: 'pointer' }}
         onClick={(e) => {

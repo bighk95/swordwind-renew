@@ -1,11 +1,13 @@
 import './App.css';
 import React from 'react';
 import Layout from './Layout';
+import ScaleProvider from './context/ScaleContext';
+
 function App() {
   return (
-    <div>
+    <ScaleProvider>
       <Layout />
-    </div>
+    </ScaleProvider>
   );
 }
 
@@ -33,8 +35,11 @@ function App() {
 
   **. tooltip... 이게 최선..? [useState를 true,false 말고 type으로 지정]
 
-  **.데이터 연결
-  **.sessionStorage 연결
+  **. 데이터 연결
+  **. sessionStorage 연결
+
+  **. useContext
+  **. 자식에서 부모로 props 끌어올리기
 */
 
 export default App;

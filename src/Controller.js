@@ -1,15 +1,13 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
+import { ScaleContext } from './context/ScaleContext';
 
-const Controller = ({ onClose }) => {
+const Controller = ({ onClose, onChange }) => {
   const [targetId, setTargetId] = useState('');
   const [targetPercentage, setTargetPercentage] = useState('');
   const [targetKey, setTargetKey] = useState(0);
-  const [appliedPatch, setAppliedPatch] = useState([]);
-
-  useEffect(() => {
-    console.log(appliedPatch);
-  }, [appliedPatch]);
+  const { scaleList, addList, removeList, resetList } =
+    useContext(ScaleContext);
 
   const [isDisabled, setIsDisabled] = useState(false);
   const [showTooltipAtPlayerInput, setShowTooltipAtPlayerInput] =
@@ -20,11 +18,11 @@ const Controller = ({ onClose }) => {
     useState(false);
 
   useEffect(() => {
-    appliedPatch.length >= 5 ? setIsDisabled(true) : setIsDisabled(false);
-  }, [appliedPatch]);
+    scaleList.length >= 5 ? setIsDisabled(true) : setIsDisabled(false);
+  }, [scaleList]);
 
   const apply = () => {
-    const isAlreadyPatched = appliedPatch.some(
+    const isAlreadyPatched = scaleList.some(
       (patch) => patch.id.replaceAll(' ', '') === targetId.replaceAll(' ', ''),
     );
 
@@ -37,11 +35,7 @@ const Controller = ({ onClose }) => {
         alert('이미 해당 소환사에 대한  패치가 적용중입니다.');
       } else {
         setTargetKey(targetKey + 1);
-
-        setAppliedPatch([
-          ...appliedPatch,
-          { id: targetId, percentage: targetPercentage, key: targetKey },
-        ]);
+        addList({ id: targetId, percentage: targetPercentage, key: targetKey });
       }
     } else {
       if (
@@ -58,6 +52,8 @@ const Controller = ({ onClose }) => {
     setTargetPercentage('');
   };
 
+  console.log(scaleList);
+
   const handleInputId = (e) => {
     const inputId = e.target.value;
     setTargetId(inputId);
@@ -69,8 +65,7 @@ const Controller = ({ onClose }) => {
   };
 
   const handleDeletePatch = (index) => {
-    const newAppliedPatch = appliedPatch.filter((_, i) => i !== index);
-    setAppliedPatch(newAppliedPatch);
+    removeList(index);
   };
   // Tooltip
 
@@ -153,7 +148,6 @@ const Controller = ({ onClose }) => {
               onClick={(e) => {
                 e.stopPropagation();
                 apply();
-                console.log(appliedPatch);
               }}
               disabled={isDisabled}
               title={
@@ -173,7 +167,7 @@ const Controller = ({ onClose }) => {
             <Subject1>소환사 닉네임</Subject1>
             <Subject2>패치 비율</Subject2>
           </SubjectContainer>
-          {appliedPatch.map((patch, index) => {
+          {scaleList.map((patch, index) => {
             return (
               <IndivController key={index}>
                 <img src={require(`./img/check.webp`)} alt="list" />
@@ -216,7 +210,7 @@ const Controller = ({ onClose }) => {
             e.stopPropagation();
             if (window.confirm('모든 패치를 초기화하시겠습니까?')) {
               alert('모든 패치를 초기화하였습니다.');
-              setAppliedPatch([]);
+              resetList();
               setTargetKey(0);
             }
           }}

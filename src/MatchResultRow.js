@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PlayerDetailsCard from './PlayerDetailsCard';
 import PlayerCard from './PlayerCard';
 import styled from 'styled-components';
+import { ScaleContext } from './context/ScaleContext';
 
 const Container = styled.div`
   display: flex;
@@ -52,6 +53,7 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
   const [matchDetailsOpen, setMatchDetailsOpen] = useState(false);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   const matchFinalResult = isWin;
+  const { scaleList } = useContext(ScaleContext);
 
   const backgroundSetting = (matchFinalResult, isButtonHovered) => {
     if (matchFinalResult) {
@@ -73,8 +75,13 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
     setMatchDetailsOpen((prev) => !prev);
   };
 
-  // console.log(matchInfo);
-  console.log(matchInfo);
+  const scaleMap = {};
+  scaleList.forEach((scale) => {
+    Object.defineProperty(scaleMap, scale.id, {
+      value: parseFloat(scale.percentage),
+      writable: true,
+    });
+  });
 
   return (
     <Container
@@ -88,16 +95,26 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
         {matchInfo
           .sort((a, b) => b.totalScoreScale - a.totalScoreScale)
           .filter((summoner) => summoner.teamId === myTeamId)
-          .map((summoner, index) => (
-            <PlayerCard
-              key={index}
-              name={summoner.playerNickname}
-              score={summoner.totalScoreScale}
-              matchfinalresult={true}
-              rank={index + 1 + '등'}
-              champ={summoner.championName}
-            />
-          ))}
+          .map((summoner, index) => {
+            return (
+              <PlayerCard
+                key={index}
+                name={summoner.playerNickname}
+                score={
+                  scaleMap[
+                    `${summoner.playerNickname.replaceAll(' ', '')}#${summoner.playerTagname.toLowerCase()}`
+                  ]
+                    ? scaleMap[
+                        `${summoner.playerNickname.replaceAll(' ', '')}#${summoner.playerTagname.toLowerCase()}`
+                      ] * summoner.totalScoreScale
+                    : summoner.totalScoreScale
+                }
+                matchfinalresult={true}
+                rank={index + 1 + '등'}
+                champ={summoner.championName}
+              />
+            );
+          })}
       </div>
       <div className="detailInfo">
         {matchDetailsOpen &&
