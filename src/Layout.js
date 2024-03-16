@@ -39,6 +39,8 @@ const Layout = () => {
         tagName,
       });
     } catch (error) {
+      navigate('/search?name=' + e.target.name.value);
+      setId(e.target.name.value);
       setMatches([]);
       setMessage('검색 결과가 없습니다. ID와 Tag를 확인해주세요.');
       return;
@@ -89,7 +91,7 @@ const Layout = () => {
     if (foundData.length > 0) {
       setMatches(foundData);
       setMessage('');
-      console.log(matches);
+      // console.log(matches);
     }
   };
 

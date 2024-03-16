@@ -52,7 +52,7 @@ const Controller = ({ onClose, onChange }) => {
     setTargetPercentage('');
   };
 
-  console.log(scaleList);
+  // console.log(scaleList);
 
   const handleInputId = (e) => {
     const inputId = e.target.value;
