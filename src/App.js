@@ -25,6 +25,7 @@ function App() {
   **. sessionStorage 연결 [필]
   **. NotFound css [?]
   **. error처리 어떻게 해야할까? [?]
+  **. 새로고침했을시 유저 검색한 페이지에 남아있을것.
   **. 데이터가 몇개가 error가 나면 정상적인 데이터도 출력되지 않는 현상 [?]
   **. 닉네임 또는 태그네임에 대문자가 들어가면 검색되지 않는현상 !!!!!! [?]
   **. penalty, advanatge에도 id값 validation 있어야 할까? [나중에]
