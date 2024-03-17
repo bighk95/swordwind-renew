@@ -32,9 +32,6 @@ const Layout = () => {
     const playerName = e.target.name.value.split('#')[0];
     const tagName = e.target.name.value.split('#')[1];
 
-    // # 미입력시 -> 500
-    // 닉네임 미존재시 -> 404
-    // 서버 불안정 -> 500
     let matchListResponse;
     try {
       matchListResponse = await getMatchNumberList({
@@ -42,7 +39,6 @@ const Layout = () => {
         tagName,
       });
     } catch (error) {
-      console.log(error);
       navigate('/search?name=' + e.target.name.value);
       setId(e.target.name.value);
       setMatches([]);
@@ -88,14 +84,11 @@ const Layout = () => {
       foundData.push(oneMatchDataContainer);
     }
 
-    // console.log('#foundData', foundData);
-
     navigate('/search?name=' + e.target.name.value);
     setId(e.target.name.value);
     if (foundData.length > 0) {
       setMatches(foundData);
       setMessage('');
-      // console.log(matches);
     }
   };
 

@@ -3,12 +3,10 @@ import MatchResultRow from './MatchResultRow';
 import styled from 'styled-components';
 
 const Main = ({ matches = [], myName }) => {
-  // console.log(matches);
   return (
     <StyledResultContainer>
       <StyledResult>
         {matches.map((match, key) => {
-          // console.log(match);
           const myTeamId = match.find((item) => {
             return (
               (

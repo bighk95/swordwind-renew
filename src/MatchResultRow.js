@@ -83,11 +83,6 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
     });
   });
 
-  console.log('scaleList', scaleList);
-  console.log('scaleMap', scaleMap['zac#kr111']);
-
-  // console.log(matchInfo);
-  // console.log(myTeamId);
   return (
     <Container
       matchfinalresult={matchFinalResult}
