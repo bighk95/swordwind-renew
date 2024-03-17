@@ -17,7 +17,7 @@ const Layout = () => {
   const [id, setId] = useState(searchParams.get('name') || '');
   const [matches, setMatches] = useState([]);
   const [message, setMessage] = useState('');
-  const [prevId, setPrevId] = useState(null);
+  // const [prevId, setPrevId] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   const [isControllerOpen, setIsControllerOpen] = useState(false);
@@ -57,7 +57,6 @@ const Layout = () => {
         totalData.push(detailInfoResponse.data.data);
       } catch (error) {}
     }
-
     let foundData = [];
     for (let i = 0; i < totalData.length; i++) {
       let oneMatchDataContainer = [];

@@ -2,13 +2,12 @@ import { React, useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { ScaleContext } from './context/ScaleContext';
 
-const Controller = ({ onClose, onChange }) => {
+const Controller = ({ onClose }) => {
   const [targetId, setTargetId] = useState('');
   const [targetPercentage, setTargetPercentage] = useState('');
   const [targetKey, setTargetKey] = useState(0);
-  const { scaleList, addList, removeList, resetList } =
+  const { scaleList, addList, removeList, resetList, scaleMap, parseList } =
     useContext(ScaleContext);
-
   const [isDisabled, setIsDisabled] = useState(false);
   const [showTooltipAtPlayerInput, setShowTooltipAtPlayerInput] =
     useState(false);
@@ -18,11 +17,11 @@ const Controller = ({ onClose, onChange }) => {
     useState(false);
 
   useEffect(() => {
-    scaleList.length >= 5 ? setIsDisabled(true) : setIsDisabled(false);
-  }, [scaleList]);
+    parseList?.length >= 5 ? setIsDisabled(true) : setIsDisabled(false);
+  }, [parseList]);
 
   const apply = () => {
-    const isAlreadyPatched = scaleList.some(
+    const isAlreadyPatched = parseList?.some(
       (patch) =>
         patch.id.replaceAll(' ', '').toLowerCase() ===
         targetId.replaceAll(' ', '').toLowerCase(),
@@ -167,7 +166,7 @@ const Controller = ({ onClose, onChange }) => {
             <Subject1>소환사 닉네임</Subject1>
             <Subject2>패치 비율</Subject2>
           </SubjectContainer>
-          {scaleList.map((patch, index) => {
+          {parseList?.map((patch, index) => {
             return (
               <IndivController key={index}>
                 <img src={require(`./img/check.webp`)} alt="list" />

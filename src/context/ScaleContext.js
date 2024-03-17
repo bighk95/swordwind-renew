@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // 컨텍스트 생성
 export const ScaleContext = React.createContext();
@@ -10,9 +10,21 @@ export const ScaleContext = React.createContext();
  */
 const ScaleProvider = ({ children }) => {
   const [scaleList, setScaleList] = useState([]);
+  const sessionPatch = window.sessionStorage;
+  const list = sessionStorage.getItem('patch');
+  const parseList = JSON.parse(list);
+  const scaleMap = {};
+  parseList?.forEach((scale) => {
+    Object.defineProperty(scaleMap, scale.id.toLowerCase(), {
+      value: parseFloat(scale.percentage),
+      writable: true,
+    });
+  });
 
   const addList = (scale) => {
     setScaleList((prevList) => [...prevList, { ...scale }]);
+    const stringfy = JSON.stringify(scaleList);
+    sessionPatch.setItem('patch', stringfy);
   };
 
   const removeList = (index) => {
@@ -30,6 +42,8 @@ const ScaleProvider = ({ children }) => {
         addList,
         removeList,
         resetList,
+        scaleMap,
+        parseList,
       }}
     >
       {children}
