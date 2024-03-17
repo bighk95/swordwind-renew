@@ -77,12 +77,14 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
 
   const scaleMap = {};
   scaleList.forEach((scale) => {
-    Object.defineProperty(scaleMap, scale.id, {
+    Object.defineProperty(scaleMap, scale.id.toLowerCase(), {
       value: parseFloat(scale.percentage),
       writable: true,
     });
   });
 
+  // console.log(matchInfo);
+  // console.log(myTeamId);
   return (
     <Container
       matchfinalresult={matchFinalResult}
@@ -99,14 +101,16 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
             return (
               <PlayerCard
                 key={index}
-                name={summoner.playerNickname}
+                name={summoner.playerNickname.toLowerCase()}
                 score={
                   scaleMap[
-                    `${summoner.playerNickname.replaceAll(' ', '')}#${summoner.playerTagname.toLowerCase()}`
+                    `${summoner.playerNickname.toLowerCase().replaceAll(' ', '')}#${summoner.playerTagname.toLowerCase()}`
                   ]
-                    ? scaleMap[
-                        `${summoner.playerNickname.replaceAll(' ', '')}#${summoner.playerTagname.toLowerCase()}`
-                      ] * summoner.totalScoreScale
+                    ? Math.round(
+                        scaleMap[
+                          `${summoner.playerNickname.toLowerCase().replaceAll(' ', '')}#${summoner.playerTagname.toLowerCase()}`
+                        ] * summoner.totalScoreScale,
+                      )
                     : summoner.totalScoreScale
                 }
                 matchfinalresult={true}

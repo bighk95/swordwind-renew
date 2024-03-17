@@ -23,7 +23,9 @@ const Controller = ({ onClose, onChange }) => {
 
   const apply = () => {
     const isAlreadyPatched = scaleList.some(
-      (patch) => patch.id.replaceAll(' ', '') === targetId.replaceAll(' ', ''),
+      (patch) =>
+        patch.id.replaceAll(' ', '').toLowerCase() ===
+        targetId.replaceAll(' ', '').toLowerCase(),
     );
 
     const isValidIdRegx =

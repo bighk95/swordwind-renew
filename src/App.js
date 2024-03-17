@@ -23,7 +23,10 @@ function App() {
 ------------------------------------------------------------------------
 
   **. sessionStorage 연결 [필]
-
+  **. NotFound css [?]
+  **. error처리 어떻게 해야할까? [?]
+  **. 데이터가 몇개가 error가 나면 정상적인 데이터도 출력되지 않는 현상 [?]
+  **. 닉네임 또는 태그네임에 대문자가 들어가면 검색되지 않는현상 !!!!!! [?]
   **. penalty, advanatge에도 id값 validation 있어야 할까? [나중에]
   **. tooltip... 이게 최선..? [useState를 true,false 말고 type으로 지정]
   **. useContext [공부할것]

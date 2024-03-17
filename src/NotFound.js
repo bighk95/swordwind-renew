@@ -5,9 +5,9 @@ const NotFound = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <BeeSadEmote src={Img.BeeSadEmote} />
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <NotFounded>
+          <BeeSadEmote src={Img.BeeSadEmote} />
           <div>현재 요청하신 페이지를 찾을 수 없습니다.</div>
           <div>페이지가 존재하지 않거나, 사용할 수 없는 페이지입니다.</div>
           <div>입력하신 주소가 정확한지 다시 한 번 확인해주세요.</div>
@@ -26,13 +26,14 @@ const NotFound = () => {
 
 const NotFounded = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   text-align: center;
   justify-content: center;
   padding: 20px;
   background-color: white;
   width: 650px;
-  height: 250px;
+  height: 300px;
 
   border-radius: 16px;
 
@@ -62,10 +63,10 @@ const NotFounded = styled.div`
 
 const BeeSadEmote = styled.img`
   display: flex;
-  position: relative;
+  position: absolute;
 
-  top: -20px;
-  left: 100px;
+  top: -60px;
+  left: -60px;
 
   width: 120px;
   height: 120px;

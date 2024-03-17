@@ -32,6 +32,9 @@ const Layout = () => {
     const playerName = e.target.name.value.split('#')[0];
     const tagName = e.target.name.value.split('#')[1];
 
+    // # 미입력시 -> 500
+    // 닉네임 미존재시 -> 404
+    // 서버 불안정 -> 500
     let matchListResponse;
     try {
       matchListResponse = await getMatchNumberList({
@@ -39,6 +42,7 @@ const Layout = () => {
         tagName,
       });
     } catch (error) {
+      console.log(error);
       navigate('/search?name=' + e.target.name.value);
       setId(e.target.name.value);
       setMatches([]);
@@ -65,8 +69,8 @@ const Layout = () => {
         const summonerInfo = {
           matchId: totalData[i][player].matchId,
           gameMode: totalData[i][player].gameMode,
-          playerNickname: totalData[i][player].gameName,
-          playerTagname: totalData[i][player].tagLine,
+          playerNickname: totalData[i][player].gameName.toLowerCase(),
+          playerTagname: totalData[i][player].tagLine.toLowerCase(),
           teamId: totalData[i][player].teamId,
           win: totalData[i][player].win,
           championName: totalData[i][player].championName,
