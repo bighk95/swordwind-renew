@@ -88,20 +88,18 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
           .sort(
             (a, b) =>
               Math.round(
-                b.totalScoreScale *
-                  scaleMap[
-                    `${b.playerNickname.toLowerCase().replaceAll(' ', '')}#${b.playerTagname.toLowerCase()}`
-                  ]
+                scaleMap[
+                  `${b.playerNickname.toLowerCase().replaceAll(' ', '')}#${b.playerTagname.toLowerCase()}`
+                ]
                   ? scaleMap[
                       `${b.playerNickname.toLowerCase().replaceAll(' ', '')}#${b.playerTagname.toLowerCase()}`
                     ] * b.totalScoreScale
                   : 1 * b.totalScoreScale,
               ) -
               Math.round(
-                a.totalScoreScale *
-                  scaleMap[
-                    `${a.playerNickname.toLowerCase().replaceAll(' ', '')}#${a.playerTagname.toLowerCase()}`
-                  ]
+                scaleMap[
+                  `${a.playerNickname.toLowerCase().replaceAll(' ', '')}#${a.playerTagname.toLowerCase()}`
+                ]
                   ? scaleMap[
                       `${a.playerNickname.toLowerCase().replaceAll(' ', '')}#${a.playerTagname.toLowerCase()}`
                     ] * a.totalScoreScale
@@ -131,55 +129,6 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
               />
             );
           })}
-        {useEffect(() => {
-          matchInfo
-            .sort(
-              (a, b) =>
-                Math.round(
-                  b.totalScoreScale *
-                    scaleMap[
-                      `${b.playerNickname.toLowerCase().replaceAll(' ', '')}#${b.playerTagname.toLowerCase()}`
-                    ]
-                    ? scaleMap[
-                        `${b.playerNickname.toLowerCase().replaceAll(' ', '')}#${b.playerTagname.toLowerCase()}`
-                      ] * b.totalScoreScale
-                    : 1 * b.totalScoreScale,
-                ) -
-                Math.round(
-                  a.totalScoreScale *
-                    scaleMap[
-                      `${a.playerNickname.toLowerCase().replaceAll(' ', '')}#${a.playerTagname.toLowerCase()}`
-                    ]
-                    ? scaleMap[
-                        `${a.playerNickname.toLowerCase().replaceAll(' ', '')}#${a.playerTagname.toLowerCase()}`
-                      ] * a.totalScoreScale
-                    : 1 * a.totalScoreScale,
-                ),
-            )
-            .filter((summoner) => summoner.teamId === myTeamId)
-            .map((summoner, index) => {
-              return (
-                <PlayerCard
-                  key={index}
-                  name={summoner.playerNickname.toLowerCase()}
-                  score={
-                    scaleMap[
-                      `${summoner.playerNickname.toLowerCase().replaceAll(' ', '')}#${summoner.playerTagname.toLowerCase()}`
-                    ]
-                      ? Math.round(
-                          scaleMap[
-                            `${summoner.playerNickname.toLowerCase().replaceAll(' ', '')}#${summoner.playerTagname.toLowerCase()}`
-                          ] * summoner.totalScoreScale,
-                        )
-                      : summoner.totalScoreScale
-                  }
-                  matchfinalresult={true}
-                  rank={index + 1 + '등'}
-                  champ={summoner.championName}
-                />
-              );
-            });
-        }, [scaleMap])}
       </div>
       <div className="detailInfo">
         {matchDetailsOpen &&

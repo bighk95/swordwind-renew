@@ -9,41 +9,55 @@ export const ScaleContext = React.createContext();
  * remove 스케일 제거
  */
 const ScaleProvider = ({ children }) => {
-  const [scaleList, setScaleList] = useState([]);
+  const [scaleList, setScaleList] = useState(
+    sessionStorage.getItem('list') || [],
+  );
   const sessionPatch = window.sessionStorage;
   const list = sessionStorage.getItem('patch');
   const parseList = JSON.parse(list);
   const scaleMap = {};
-  parseList?.forEach((scale) => {
-    Object.defineProperty(scaleMap, scale.id.toLowerCase(), {
-      value: parseFloat(scale.percentage),
-      writable: true,
+
+  useEffect(() => {
+    scaleList?.forEach((scale) => {
+      Object.defineProperty(scaleMap, scale.id.toLowerCase(), {
+        value: parseFloat(scale.percentage),
+        writable: true,
+      });
     });
-  });
+  }, [parseList]);
 
   const addList = (scale) => {
-    setScaleList((prevList) => [...prevList, { ...scale }]);
-    const stringfy = JSON.stringify(scaleList);
-    sessionPatch.setItem('patch', stringfy);
+    setScaleList((prevList) => {
+      const newList = [...prevList, { ...scale }];
+      const stringfy = JSON.stringify(newList);
+      sessionPatch.setItem('patch', stringfy);
+      return newList;
+    });
   };
 
   const removeList = (index) => {
-    setScaleList((prevList) => prevList.filter((item, idx) => index !== idx));
+    setScaleList((prevList) => {
+      const newList = prevList.filter((item, idx) => index !== idx);
+      const stringfy = JSON.stringify(newList);
+      sessionPatch.setItem('patch', stringfy);
+      return newList;
+    });
   };
 
   const resetList = () => {
     setScaleList([]);
+    sessionPatch.clear();
   };
 
   return (
     <ScaleContext.Provider
       value={{
         scaleList,
+        scaleMap,
+        parseList,
         addList,
         removeList,
         resetList,
-        scaleMap,
-        parseList,
       }}
     >
       {children}
