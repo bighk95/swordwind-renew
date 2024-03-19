@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Main from './Main';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useParams, useBeforeunload } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
@@ -19,7 +19,6 @@ const Layout = () => {
   const [message, setMessage] = useState('');
   // const [prevId, setPrevId] = useState(null);
   const navigate = useNavigate();
-  const location = useLocation();
   const [isControllerOpen, setIsControllerOpen] = useState(false);
 
   const closeController = () => {
@@ -39,7 +38,7 @@ const Layout = () => {
         tagName,
       });
     } catch (error) {
-      navigate('/search?name=' + e.target.name.value);
+      navigate('/search?name=' + playerName + '%' + tagName);
       setId(e.target.name.value);
       setMatches([]);
       setMessage('검색 결과가 없습니다. ID와 Tag를 확인해주세요.');
@@ -83,13 +82,84 @@ const Layout = () => {
       foundData.push(oneMatchDataContainer);
     }
 
-    navigate('/search?name=' + e.target.name.value);
+    navigate('/search?name=' + playerName + '%' + tagName);
     setId(e.target.name.value);
     if (foundData.length > 0) {
       setMatches(foundData);
       setMessage('');
     }
   };
+
+  const reHandleSearch = async (e) => {
+    e?.preventDefault();
+
+    const playerName = id.split('%')[0];
+    const tagName = id.split('%')[1];
+
+    let matchListResponse;
+    try {
+      matchListResponse = await getMatchNumberList({
+        playerName,
+        tagName,
+      });
+    } catch (error) {
+      navigate('/search?name=' + playerName + '%' + tagName);
+      setId(playerName + '#' + tagName);
+      setMatches([]);
+      setMessage('검색 결과가 없습니다. ID와 Tag를 확인해주세요.');
+      return;
+    }
+
+    const matchId = matchListResponse.data.data;
+
+    const totalData = [];
+    for (let i = 0; i < matchId.length; i++) {
+      try {
+        const detailInfoResponse = await getMatchDetail({
+          matchId: matchId[i],
+        });
+        totalData.push(detailInfoResponse.data.data);
+      } catch (error) {}
+    }
+    let foundData = [];
+    for (let i = 0; i < totalData.length; i++) {
+      let oneMatchDataContainer = [];
+      for (let player in totalData[i]) {
+        const summonerInfo = {
+          matchId: totalData[i][player].matchId,
+          gameMode: totalData[i][player].gameMode,
+          playerNickname: totalData[i][player].gameName.toLowerCase(),
+          playerTagname: totalData[i][player].tagLine.toLowerCase(),
+          teamId: totalData[i][player].teamId,
+          win: totalData[i][player].win,
+          championName: totalData[i][player].championName,
+          dealingScale: totalData[i][player].totalDamageDealtToChampions,
+          tankingScale: totalData[i][player].totalDamageTaken,
+          healingScale: totalData[i][player].totalHeal,
+          totalScoreScale: Math.round(
+            totalData[i][player].totalDamageDealtToChampions +
+              totalData[i][player].totalDamageTaken * 0.4 +
+              totalData[i][player].totalHeal * 0.2,
+          ),
+        };
+        oneMatchDataContainer.push(summonerInfo);
+      }
+      foundData.push(oneMatchDataContainer);
+    }
+
+    navigate('/search?name=' + playerName + '%' + tagName);
+    setId(playerName + '#' + tagName);
+    if (foundData.length > 0) {
+      setMatches(foundData);
+      setMessage('');
+    }
+  };
+
+  useEffect(() => {
+    if (id && id !== 'undefined' && id.includes('%')) {
+      reHandleSearch();
+    }
+  }, [id]);
 
   // result
   return (
