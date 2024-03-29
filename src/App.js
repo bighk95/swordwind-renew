@@ -1,9 +1,14 @@
 import './App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Layout from './Layout';
 import ScaleProvider from './context/ScaleContext';
+import { search } from './api/summoner';
 
 function App() {
+  useEffect(() => {
+    search();
+  }, []);
+
   return (
     <ScaleProvider>
       <Layout />
