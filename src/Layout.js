@@ -46,13 +46,17 @@ const Layout = () => {
         }
       }
       if (foundData.length > 0) {
-        navigate('/search?name=' + playerName + '%' + tagName);
+        navigate(
+          '/search?name=' + encodeURIComponent(playerName + '#' + tagName),
+        );
         setId(e.target.name.value);
         setMatches(foundData);
         setMessage('');
       }
     } catch (error) {
-      navigate('/search?name=' + playerName + '%' + tagName);
+      navigate(
+        '/search?name=' + encodeURIComponent(playerName + '#' + tagName),
+      );
       setId(e.target.name.value);
       setMatches([]);
       setMessage('검색 결과가 없습니다. ID와 Tag를 확인해주세요.');
@@ -60,12 +64,7 @@ const Layout = () => {
     }
   };
 
-  const reHandleSearch = async (e) => {
-    e?.preventDefault();
-
-    const playerName = id.split('%')[0];
-    const tagName = id.split('%')[1];
-
+  const reHandleSearch = async (playerName, tagName) => {
     let matchListResponse;
     try {
       matchListResponse = await search(playerName, tagName);
@@ -80,13 +79,17 @@ const Layout = () => {
         }
       }
       if (foundData.length > 0) {
-        navigate('/search?name=' + playerName + '%' + tagName);
+        navigate(
+          '/search?name=' + encodeURIComponent(playerName + '#' + tagName),
+        );
         setId(playerName + '#' + tagName);
         setMatches(foundData);
         setMessage('');
       }
     } catch (error) {
-      navigate('/search?name=' + playerName + '%' + tagName);
+      navigate(
+        '/search?name=' + encodeURIComponent(playerName + '#' + tagName),
+      );
       setId(playerName + '#' + tagName);
       setMatches([]);
       setMessage('검색 결과가 없습니다. ID와 Tag를 확인해주세요.');
@@ -95,10 +98,15 @@ const Layout = () => {
   };
 
   useEffect(() => {
-    if (id && id !== 'undefined' && id.includes('%')) {
-      reHandleSearch();
+    if (id && id.includes('#')) {
+      const [playerName, tagName] = id.split('#');
+      reHandleSearch(playerName, tagName);
     }
   }, [id]);
+
+  const handleUpdate = async (e) => {
+    e?.preventDefault();
+  };
 
   // result
   return (
