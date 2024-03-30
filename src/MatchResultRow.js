@@ -15,7 +15,7 @@ const Container = styled.div`
   transition: background 0.5s ease;
 
   background: ${(props) =>
-    props.$backgroundSetting(props.matchfinalresult, props.$isbuttonhovered)};
+    props.$backgroundSetting(props.$matchfinalresult, props.$isbuttonhovered)};
 
   .simpleInfo {
     display: flex;
@@ -37,7 +37,7 @@ const ShowMatchDetails = styled.button`
   transition: background 0.5s ease;
 
   background: ${(props) =>
-    props.$backgroundSetting(props.matchfinalresult, props.$isbuttonhovered)};
+    props.$backgroundSetting(props.$matchfinalresult, props.$isbuttonhovered)};
 
   .arrow {
     width: 25px;
@@ -77,7 +77,7 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
 
   return (
     <Container
-      matchfinalresult={matchFinalResult}
+      $matchfinalresult={matchFinalResult}
       $isbuttonhovered={isButtonHovered}
       $backgroundSetting={backgroundSetting}
       onMouseEnter={() => setIsButtonHovered(true)}
@@ -123,7 +123,7 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
                       )
                     : summoner.totalScoreScale
                 }
-                matchfinalresult={true}
+                matchfinalresult={matchFinalResult}
                 rank={index + 1 + '등'}
                 champ={summoner.championName}
               />
@@ -170,7 +170,7 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
       {matchInfo && (
         <ShowMatchDetails
           className="showMatchDetails"
-          matchfinalresult={matchFinalResult}
+          $matchfinalresult={matchFinalResult}
           $isbuttonhovered={isButtonHovered}
           $backgroundSetting={backgroundSetting}
           onClick={ShowMatchDetailsButton}
