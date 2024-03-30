@@ -15,7 +15,7 @@ const Main = ({ matches = [], myName }) => {
                 item.summoner.tagLine.toLowerCase()
               )
                 .replaceAll(' ', '')
-                .toLowerCase() === myName.toLowerCase()
+                .toLowerCase() === myName.toLowerCase().replaceAll(' ', '')
             );
           })?.teamId;
 
@@ -23,7 +23,7 @@ const Main = ({ matches = [], myName }) => {
             return (
               (item.summoner.gameName + '#' + item.summoner.tagLine)
                 .replaceAll(' ', '')
-                .toLowerCase() === myName.toLowerCase()
+                .toLowerCase() === myName.toLowerCase().replaceAll(' ', '')
             );
           })?.win;
 

@@ -111,7 +111,9 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
             return (
               <PlayerCard
                 key={index}
-                name={summoner.summoner.gameName.toLowerCase()}
+                name={summoner.summoner.gameName
+                  .toLowerCase()
+                  .replaceAll(' ', '')}
                 score={
                   scaleMap[
                     `${summoner.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${summoner.summoner.tagLine.toLowerCase()}`

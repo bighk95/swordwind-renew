@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Header = ({ handleSearch, message }) => {
+const Header = ({ handleSearch, handleUpdate, message }) => {
   return (
     <div>
       <StyledContainer>
@@ -15,6 +15,9 @@ const Header = ({ handleSearch, message }) => {
             placeholder="소환사 이름 + #KR1"
           ></StyledInput>
           <StyledButton type="submit">검색</StyledButton>
+        </form>
+        <form onSubmit={handleUpdate}>
+          <StyledButton type="submit">전적갱신</StyledButton>
         </form>
         <span
           className="message"

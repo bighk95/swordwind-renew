@@ -7,7 +7,7 @@ export const search = async (gameName, tagLine) => {
 };
 
 export const update = async (gameName, tagLine) => {
-  return await axios.get(
+  return await axios.post(
     `/api/swordwind/summoner/update/${gameName}/${tagLine}`,
   );
 };

@@ -21,6 +21,9 @@ const Layout = () => {
   // const [prevId, setPrevId] = useState(null);
   const navigate = useNavigate();
   const [isControllerOpen, setIsControllerOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
 
   const closeController = () => {
     setIsControllerOpen(false);
@@ -52,6 +55,13 @@ const Layout = () => {
         setId(e.target.name.value);
         setMatches(foundData);
         setMessage('');
+      } else {
+        navigate(
+          '/search?name=' + encodeURIComponent(playerName + '#' + tagName),
+        );
+        setId(e.target.name.value);
+        setMatches(foundData);
+        setMessage('최신 정보가 없습니다. 전적 갱신을 해주세요.');
       }
     } catch (error) {
       navigate(
@@ -105,19 +115,55 @@ const Layout = () => {
   }, [id]);
 
   const handleUpdate = async (e) => {
+    setIsLoading(true);
+    setError(null);
+
     e?.preventDefault();
+    const playerName = id.split('#')[0];
+    const tagName = id.split('#')[1];
+
+    try {
+      await update(playerName, tagName);
+      await reHandleSearch(playerName, tagName);
+    } catch (error) {
+      console.log(error);
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // result
   return (
     <StyledBackground onClick={closeController}>
-      <Header handleSearch={handleSearch} message={message} />
-      <Routes>
+      <Header
+        handleSearch={handleSearch}
+        message={message}
+        handleUpdate={handleUpdate}
+      />
+      {/* <Routes>
         <Route path="/"></Route>
         <Route
           path="/search"
           element={<Main matches={matches} message={message} myName={id} />}
         />
+        <Route path="*" element={<NotFound />}></Route>
+      </Routes> */}
+      <Routes>
+        <Route path="/" element={<></>}></Route>
+        {isLoading ? (
+          <Route path="/search" element={<p>데이터를 받아오는 중...</p>} />
+        ) : error ? (
+          <Route
+            path="/search"
+            element={<p>에러가 발생했습니다: {error.message}</p>}
+          />
+        ) : (
+          <Route
+            path="/search"
+            element={<Main matches={matches} message={message} myName={id} />}
+          />
+        )}
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       {isControllerOpen && <Controller onClose={closeController} />}
