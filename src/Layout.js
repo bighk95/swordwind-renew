@@ -11,6 +11,7 @@ import Controller from './Controller';
 import getMatchNumberList from './api/getMatchNumberList';
 import getMatchDetail from './api/getMatchDetail';
 import Img from './img/img.js';
+import { search, update } from './api/summoner.js';
 
 const Layout = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -33,60 +34,29 @@ const Layout = () => {
 
     let matchListResponse;
     try {
-      matchListResponse = await getMatchNumberList({
-        playerName,
-        tagName,
-      });
+      matchListResponse = await search(playerName, tagName);
+      const foundData = matchListResponse.data;
+      for (let i = 0; i < foundData.length; i++) {
+        for (let j = 0; j < foundData[i].length; j++) {
+          foundData[i][j].totalScoreScale = Math.round(
+            foundData[i][j].totalDamageDealtToChampions +
+              foundData[i][j].totalDamageTaken * 0.4 +
+              foundData[i][j].totalHeal * 0.2,
+          );
+        }
+      }
+      if (foundData.length > 0) {
+        navigate('/search?name=' + playerName + '%' + tagName);
+        setId(e.target.name.value);
+        setMatches(foundData);
+        setMessage('');
+      }
     } catch (error) {
       navigate('/search?name=' + playerName + '%' + tagName);
       setId(e.target.name.value);
       setMatches([]);
       setMessage('검색 결과가 없습니다. ID와 Tag를 확인해주세요.');
       return;
-    }
-
-    const matchId = matchListResponse.data.data;
-
-    const totalData = [];
-    for (let i = 0; i < matchId.length; i++) {
-      try {
-        const detailInfoResponse = await getMatchDetail({
-          matchId: matchId[i],
-        });
-        totalData.push(detailInfoResponse.data.data);
-      } catch (error) {}
-    }
-    let foundData = [];
-    for (let i = 0; i < totalData.length; i++) {
-      let oneMatchDataContainer = [];
-      for (let player in totalData[i]) {
-        const summonerInfo = {
-          matchId: totalData[i][player].matchId,
-          gameMode: totalData[i][player].gameMode,
-          playerNickname: totalData[i][player].gameName.toLowerCase(),
-          playerTagname: totalData[i][player].tagLine.toLowerCase(),
-          teamId: totalData[i][player].teamId,
-          win: totalData[i][player].win,
-          championName: totalData[i][player].championName,
-          dealingScale: totalData[i][player].totalDamageDealtToChampions,
-          tankingScale: totalData[i][player].totalDamageTaken,
-          healingScale: totalData[i][player].totalHeal,
-          totalScoreScale: Math.round(
-            totalData[i][player].totalDamageDealtToChampions +
-              totalData[i][player].totalDamageTaken * 0.4 +
-              totalData[i][player].totalHeal * 0.2,
-          ),
-        };
-        oneMatchDataContainer.push(summonerInfo);
-      }
-      foundData.push(oneMatchDataContainer);
-    }
-
-    navigate('/search?name=' + playerName + '%' + tagName);
-    setId(e.target.name.value);
-    if (foundData.length > 0) {
-      setMatches(foundData);
-      setMessage('');
     }
   };
 
@@ -98,60 +68,29 @@ const Layout = () => {
 
     let matchListResponse;
     try {
-      matchListResponse = await getMatchNumberList({
-        playerName,
-        tagName,
-      });
+      matchListResponse = await search(playerName, tagName);
+      const foundData = matchListResponse.data;
+      for (let i = 0; i < foundData.length; i++) {
+        for (let j = 0; j < foundData[i].length; j++) {
+          foundData[i][j].totalScoreScale = Math.round(
+            foundData[i][j].totalDamageDealtToChampions +
+              foundData[i][j].totalDamageTaken * 0.4 +
+              foundData[i][j].totalHeal * 0.2,
+          );
+        }
+      }
+      if (foundData.length > 0) {
+        navigate('/search?name=' + playerName + '%' + tagName);
+        setId(playerName + '#' + tagName);
+        setMatches(foundData);
+        setMessage('');
+      }
     } catch (error) {
       navigate('/search?name=' + playerName + '%' + tagName);
       setId(playerName + '#' + tagName);
       setMatches([]);
       setMessage('검색 결과가 없습니다. ID와 Tag를 확인해주세요.');
       return;
-    }
-
-    const matchId = matchListResponse.data.data;
-
-    const totalData = [];
-    for (let i = 0; i < matchId.length; i++) {
-      try {
-        const detailInfoResponse = await getMatchDetail({
-          matchId: matchId[i],
-        });
-        totalData.push(detailInfoResponse.data.data);
-      } catch (error) {}
-    }
-    let foundData = [];
-    for (let i = 0; i < totalData.length; i++) {
-      let oneMatchDataContainer = [];
-      for (let player in totalData[i]) {
-        const summonerInfo = {
-          matchId: totalData[i][player].matchId,
-          gameMode: totalData[i][player].gameMode,
-          playerNickname: totalData[i][player].gameName.toLowerCase(),
-          playerTagname: totalData[i][player].tagLine.toLowerCase(),
-          teamId: totalData[i][player].teamId,
-          win: totalData[i][player].win,
-          championName: totalData[i][player].championName,
-          dealingScale: totalData[i][player].totalDamageDealtToChampions,
-          tankingScale: totalData[i][player].totalDamageTaken,
-          healingScale: totalData[i][player].totalHeal,
-          totalScoreScale: Math.round(
-            totalData[i][player].totalDamageDealtToChampions +
-              totalData[i][player].totalDamageTaken * 0.4 +
-              totalData[i][player].totalHeal * 0.2,
-          ),
-        };
-        oneMatchDataContainer.push(summonerInfo);
-      }
-      foundData.push(oneMatchDataContainer);
-    }
-
-    navigate('/search?name=' + playerName + '%' + tagName);
-    setId(playerName + '#' + tagName);
-    if (foundData.length > 0) {
-      setMatches(foundData);
-      setMessage('');
     }
   };
 

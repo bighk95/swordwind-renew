@@ -89,19 +89,19 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
             (a, b) =>
               Math.round(
                 scaleMap[
-                  `${b.playerNickname.toLowerCase().replaceAll(' ', '')}#${b.playerTagname.toLowerCase()}`
+                  `${b.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${b.summoner.tagLine.toLowerCase()}`
                 ]
                   ? scaleMap[
-                      `${b.playerNickname.toLowerCase().replaceAll(' ', '')}#${b.playerTagname.toLowerCase()}`
+                      `${b.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${b.summoner.tagLine.toLowerCase()}`
                     ] * b.totalScoreScale
                   : 1 * b.totalScoreScale,
               ) -
               Math.round(
                 scaleMap[
-                  `${a.playerNickname.toLowerCase().replaceAll(' ', '')}#${a.playerTagname.toLowerCase()}`
+                  `${a.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${a.summoner.tagLine.toLowerCase()}`
                 ]
                   ? scaleMap[
-                      `${a.playerNickname.toLowerCase().replaceAll(' ', '')}#${a.playerTagname.toLowerCase()}`
+                      `${a.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${a.summoner.tagLine.toLowerCase()}`
                     ] * a.totalScoreScale
                   : 1 * a.totalScoreScale,
               ),
@@ -111,14 +111,14 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
             return (
               <PlayerCard
                 key={index}
-                name={summoner.playerNickname.toLowerCase()}
+                name={summoner.summoner.gameName.toLowerCase()}
                 score={
                   scaleMap[
-                    `${summoner.playerNickname.toLowerCase().replaceAll(' ', '')}#${summoner.playerTagname.toLowerCase()}`
+                    `${summoner.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${summoner.summoner.tagLine.toLowerCase()}`
                   ]
                     ? Math.round(
                         scaleMap[
-                          `${summoner.playerNickname.toLowerCase().replaceAll(' ', '')}#${summoner.playerTagname.toLowerCase()}`
+                          `${summoner.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${summoner.summoner.tagLine.toLowerCase()}`
                         ] * summoner.totalScoreScale,
                       )
                     : summoner.totalScoreScale
@@ -138,20 +138,20 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
                 Math.round(
                   b.totalScoreScale *
                     scaleMap[
-                      `${b.playerNickname.toLowerCase().replaceAll(' ', '')}#${b.playerTagname.toLowerCase()}`
+                      `${b.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${b.summoner.tagLine.toLowerCase()}`
                     ]
                     ? scaleMap[
-                        `${b.playerNickname.toLowerCase().replaceAll(' ', '')}#${b.playerTagname.toLowerCase()}`
+                        `${b.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${b.summoner.tagLine.toLowerCase()}`
                       ] * b.totalScoreScale
                     : 1 * b.totalScoreScale,
                 ) -
                 Math.round(
                   a.totalScoreScale *
                     scaleMap[
-                      `${a.playerNickname.toLowerCase().replaceAll(' ', '')}#${a.playerTagname.toLowerCase()}`
+                      `${a.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${a.summoner.tagLine.toLowerCase()}`
                     ]
                     ? scaleMap[
-                        `${a.playerNickname.toLowerCase().replaceAll(' ', '')}#${a.playerTagname.toLowerCase()}`
+                        `${a.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${a.summoner.tagLine.toLowerCase()}`
                       ] * a.totalScoreScale
                     : 1 * a.totalScoreScale,
                 ),
@@ -161,9 +161,9 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
               <PlayerDetailsCard
                 key={index}
                 name={name}
-                deal={name.dealingScale}
-                tank={name.tankingScale}
-                heal={name.healingScale}
+                deal={name.totalDamageDealtToChampions}
+                tank={name.totalDamageTaken}
+                heal={name.totalHeal}
               />
             ))}
       </div>

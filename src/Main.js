@@ -10,9 +10,9 @@ const Main = ({ matches = [], myName }) => {
           const myTeamId = match.find((item) => {
             return (
               (
-                item.playerNickname.toLowerCase() +
+                item.summoner.gameName.toLowerCase() +
                 '#' +
-                item.playerTagname.toLowerCase()
+                item.summoner.tagLine.toLowerCase()
               )
                 .replaceAll(' ', '')
                 .toLowerCase() === myName.toLowerCase()
@@ -21,7 +21,7 @@ const Main = ({ matches = [], myName }) => {
 
           const isWin = match.find((item) => {
             return (
-              (item.playerNickname + '#' + item.playerTagname)
+              (item.summoner.gameName + '#' + item.summoner.tagLine)
                 .replaceAll(' ', '')
                 .toLowerCase() === myName.toLowerCase()
             );
