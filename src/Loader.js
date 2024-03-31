@@ -25,7 +25,9 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: absolute;
+  left: calc(50% - 50px);
+  z-index: 100;
 `;
 
 const StyledLoaderContainer = styled.div`

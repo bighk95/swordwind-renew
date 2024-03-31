@@ -50,24 +50,18 @@ const Layout = () => {
         }
       }
       if (foundData.length > 0) {
-        navigate(
-          '/search?name=' + encodeURIComponent(playerName + '#' + tagName),
-        );
+        navigate('/?name=' + encodeURIComponent(playerName + '#' + tagName));
         setId(e.target.name.value);
         setMatches(foundData);
         setMessage('');
       } else {
-        navigate(
-          '/search?name=' + encodeURIComponent(playerName + '#' + tagName),
-        );
+        navigate('/?name=' + encodeURIComponent(playerName + '#' + tagName));
         setId(e.target.name.value);
         setMatches(foundData);
         setMessage('최신 정보가 없습니다. 전적 갱신을 해주세요.');
       }
     } catch (error) {
-      navigate(
-        '/search?name=' + encodeURIComponent(playerName + '#' + tagName),
-      );
+      navigate('/?name=' + encodeURIComponent(playerName + '#' + tagName));
       setId(e.target.name.value);
       setMatches([]);
       setMessage('검색 결과가 없습니다. ID와 Tag를 확인해주세요.');
@@ -90,17 +84,13 @@ const Layout = () => {
         }
       }
       if (foundData.length > 0) {
-        navigate(
-          '/search?name=' + encodeURIComponent(playerName + '#' + tagName),
-        );
+        navigate('/?name=' + encodeURIComponent(playerName + '#' + tagName));
         setId(playerName + '#' + tagName);
         setMatches(foundData);
         setMessage('');
       }
     } catch (error) {
-      navigate(
-        '/search?name=' + encodeURIComponent(playerName + '#' + tagName),
-      );
+      navigate('/?name=' + encodeURIComponent(playerName + '#' + tagName));
       setId(playerName + '#' + tagName);
       setMatches([]);
       setMessage('검색 결과가 없습니다. ID와 Tag를 확인해주세요.');
@@ -142,20 +132,18 @@ const Layout = () => {
         handleUpdate={handleUpdate}
       />
       <Routes>
-        <Route path="/" element={<></>}></Route>
-        {isLoading ? (
-          <Route path="/search" element={Loader()} />
-        ) : error ? (
-          <Route
-            path="/search"
-            element={setMessage('잠시 후 다시 시도해주세요.')}
-          />
-        ) : (
-          <Route
-            path="/search"
-            element={<Main matches={matches} message={message} myName={id} />}
-          />
-        )}
+        <Route
+          path="/"
+          element={
+            <Main
+              loading={isLoading}
+              matches={matches}
+              message={message}
+              myName={id}
+            />
+          }
+        ></Route>
+
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       {isControllerOpen && <Controller onClose={closeController} />}

@@ -1,11 +1,13 @@
 import React from 'react';
 import MatchResultRow from './MatchResultRow';
 import styled from 'styled-components';
+import Loader from './Loader';
 
-const Main = ({ matches = [], myName }) => {
+const Main = ({ loading, matches = [], myName }) => {
   return (
     <StyledResultContainer>
       <StyledResult>
+        {loading && <Loader />}
         {matches.map((match, key) => {
           const myTeamId = match.find((item) => {
             return (

@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Header = ({ handleSearch, handleUpdate, message }) => {
   return (
     <div>
       <StyledContainer>
-        <StyledTitle href="/">
+        <StyledTitle to="/">
           <h1>칼바람 나락 기여도 랭킹</h1>
         </StyledTitle>
         <form onSubmit={handleSearch}>
@@ -34,7 +35,7 @@ const Header = ({ handleSearch, handleUpdate, message }) => {
   );
 };
 
-const StyledTitle = styled.a`
+const StyledTitle = styled(Link)`
   display: inline-block;
   text-decoration-line: none;
   color: black;
