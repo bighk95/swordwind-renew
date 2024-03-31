@@ -12,6 +12,7 @@ import getMatchNumberList from './api/getMatchNumberList';
 import getMatchDetail from './api/getMatchDetail';
 import Img from './img/img.js';
 import { search, update } from './api/summoner.js';
+import Loader from './Loader.js';
 
 const Layout = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -126,7 +127,6 @@ const Layout = () => {
       await update(playerName, tagName);
       await reHandleSearch(playerName, tagName);
     } catch (error) {
-      console.log(error);
       setError(error);
     } finally {
       setIsLoading(false);
@@ -141,22 +141,14 @@ const Layout = () => {
         message={message}
         handleUpdate={handleUpdate}
       />
-      {/* <Routes>
-        <Route path="/"></Route>
-        <Route
-          path="/search"
-          element={<Main matches={matches} message={message} myName={id} />}
-        />
-        <Route path="*" element={<NotFound />}></Route>
-      </Routes> */}
       <Routes>
         <Route path="/" element={<></>}></Route>
         {isLoading ? (
-          <Route path="/search" element={<p>데이터를 받아오는 중...</p>} />
+          <Route path="/search" element={Loader()} />
         ) : error ? (
           <Route
             path="/search"
-            element={<p>에러가 발생했습니다: {error.message}</p>}
+            element={setMessage('잠시 후 다시 시도해주세요.')}
           />
         ) : (
           <Route
