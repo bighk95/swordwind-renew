@@ -9,17 +9,20 @@ const Header = ({ handleSearch, handleUpdate, message }) => {
         <StyledTitle to="/">
           <h1>칼바람 나락 기여도 랭킹</h1>
         </StyledTitle>
-        <form onSubmit={handleSearch}>
-          <StyledInput
-            type="text"
-            name="name"
-            placeholder="소환사 이름 + #KR1"
-          ></StyledInput>
-          <StyledButton type="submit">검색</StyledButton>
-        </form>
-        <form onSubmit={handleUpdate}>
-          <StyledButton type="submit">전적갱신</StyledButton>
-        </form>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <form onSubmit={handleSearch}>
+            <StyledInput
+              type="text"
+              name="name"
+              placeholder="소환사 이름 + #KR1"
+            ></StyledInput>
+            <StyledButton type="submit">검색</StyledButton>
+          </form>
+          <form onSubmit={handleUpdate}>
+            <StyledButton type="submit">전적갱신</StyledButton>
+          </form>
+        </div>
+
         <span
           className="message"
           style={{
@@ -60,7 +63,7 @@ const StyledButton = styled.button`
 
   font-size: 14px;
   height: 40px;
-  width: 60px;
+  width: 80px;
   margin: 0 10px 0 10px;
   background-color: #1e90ff;
   transition: 0.2s ease;
