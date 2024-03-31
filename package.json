@@ -21,7 +21,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "rimraf ./node_modules/.cache/gh-pages && gh-pages --branch gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -41,5 +43,9 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://jjongtaeng.com"
+  "proxy": "https://jjongtaeng.com",
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
+  },
+  "homepage": "https://bighk95.github.io/swordwind-renew"
 }
