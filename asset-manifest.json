@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/swordwind-renew/static/css/main.e6c13ad2.css",
+    "main.js": "/swordwind-renew/static/js/main.9421c50c.js",
+    "static/js/453.a9884336.chunk.js": "/swordwind-renew/static/js/453.a9884336.chunk.js",
+    "static/media/riot-games-self-publish-league-legends-teamfight-tactics-southeast-asia.png": "/swordwind-renew/static/media/riot-games-self-publish-league-legends-teamfight-tactics-southeast-asia.faf7269a4bc6faaa30f9.png",
+    "static/media/controller3.webp": "/swordwind-renew/static/media/controller3.bd9290fdce80e8f9c6e8.webp",
+    "static/media/check.webp": "/swordwind-renew/static/media/check.cdd2019ffb711f0e1855.webp",
+    "static/media/reset.png": "/swordwind-renew/static/media/reset.3ff97262e58968498805.png",
+    "static/media/Bee_Sad_Emote.webp": "/swordwind-renew/static/media/Bee_Sad_Emote.7c77a1525513ebfa201b.webp",
+    "index.html": "/swordwind-renew/index.html",
+    "main.e6c13ad2.css.map": "/swordwind-renew/static/css/main.e6c13ad2.css.map",
+    "main.9421c50c.js.map": "/swordwind-renew/static/js/main.9421c50c.js.map",
+    "453.a9884336.chunk.js.map": "/swordwind-renew/static/js/453.a9884336.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.9421c50c.js"
+  ]
+}
