@@ -26,6 +26,8 @@ const Container = styled.div`
   position: absolute;
   left: calc(50% - 50px);
   z-index: 100;
+
+  margin-top: 10px;
 `;
 
 const StyledLoaderContainer = styled.div`
