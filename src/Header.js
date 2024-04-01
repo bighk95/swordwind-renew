@@ -2,7 +2,13 @@ import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, useSearchParams } from 'react-router-dom';
 
-const Header = ({ handleSearch, handleUpdate, message, setMatches }) => {
+const Header = ({
+  handleSearch,
+  handleUpdate,
+  message,
+  setMessage,
+  setMatches,
+}) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const inputRef = useRef(null);
   const name = searchParams.get('name');
@@ -24,6 +30,7 @@ const Header = ({ handleSearch, handleUpdate, message, setMatches }) => {
           onClick={() => {
             inputRef.current.value = '';
             setMatches([]);
+            setMessage([]);
           }}
         >
           <h1>칼바람 나락 기여도 랭킹</h1>

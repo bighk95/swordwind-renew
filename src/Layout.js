@@ -31,8 +31,8 @@ const Layout = () => {
   const handleSearch = async (e) => {
     e?.preventDefault();
 
-    const playerName = e.target.name.value.split('#')[0];
-    const tagName = e.target.name.value.split('#')[1];
+    let [playerName, tagName] = e.target.name.value.split('#');
+    tagName = tagName || '';
 
     let matchListResponse;
     try {
@@ -47,19 +47,29 @@ const Layout = () => {
           );
         }
       }
+
       if (foundData.length > 0) {
-        navigate('/?name=' + encodeURIComponent(playerName + '#' + tagName));
+        navigate(
+          '/?name=' +
+            encodeURIComponent(playerName + (tagName ? '#' + tagName : '')),
+        );
         setId(e.target.name.value);
         setMatches(foundData);
         setMessage('');
       } else {
-        navigate('/?name=' + encodeURIComponent(playerName + '#' + tagName));
+        navigate(
+          '/?name=' +
+            encodeURIComponent(playerName + (tagName ? '#' + tagName : '')),
+        );
         setId(e.target.name.value);
         setMatches(foundData);
         setMessage('최신 정보가 없습니다. 전적 갱신을 해주세요.');
       }
     } catch (error) {
-      navigate('/?name=' + encodeURIComponent(playerName + '#' + tagName));
+      navigate(
+        '/?name=' +
+          encodeURIComponent(playerName + (tagName ? '#' + tagName : '')),
+      );
       setId(e.target.name.value);
       setMatches([]);
       setMessage('검색 결과가 없습니다. ID와 Tag를 확인해주세요.');
@@ -82,14 +92,20 @@ const Layout = () => {
         }
       }
       if (foundData.length > 0) {
-        navigate('/?name=' + encodeURIComponent(playerName + '#' + tagName));
-        setId(playerName + '#' + tagName);
+        navigate(
+          '/?name=' +
+            encodeURIComponent(playerName + (tagName ? '#' + tagName : '')),
+        );
+        setId(playerName + (tagName ? '#' + tagName : ''));
         setMatches(foundData);
         setMessage('');
       }
     } catch (error) {
-      navigate('/?name=' + encodeURIComponent(playerName + '#' + tagName));
-      setId(playerName + '#' + tagName);
+      navigate(
+        '/?name=' +
+          encodeURIComponent(playerName + (tagName ? '#' + tagName : '')),
+      );
+      setId(playerName + (tagName ? '#' + tagName : ''));
       setMatches([]);
       setMessage('검색 결과가 없습니다. ID와 Tag를 확인해주세요.');
       return;
@@ -97,7 +113,7 @@ const Layout = () => {
   };
 
   useEffect(() => {
-    if (id && id.includes('#')) {
+    if (id) {
       const [playerName, tagName] = id.split('#');
       reHandleSearch(playerName, tagName);
     }
@@ -125,8 +141,9 @@ const Layout = () => {
     <StyledBackground onClick={closeController}>
       <Header
         setMatches={setMatches}
-        handleSearch={handleSearch}
+        setMessage={setMessage}
         message={message}
+        handleSearch={handleSearch}
         handleUpdate={handleUpdate}
       />
       <Routes>
