@@ -31,6 +31,7 @@ const Controller = ({ onClose }) => {
     const isValidIdRegx =
       /^[a-zA-Z0-9가-힣\u3400-\u4DBF\u4E00-\u9FFF\u20000-\u2A6DF\u3040-\u309F\u30A0-\u30FF]+#[a-zA-Z0-9가-힣\u3400-\u4DBF\u4E00-\u9FFF\u20000-\u2A6DF\u3040-\u309F\u30A0-\u30FF]+$/;
 
+    // validation, setAppliedPatch
     if (isValidIdRegx.test(targetId)) {
       if (isAlreadyPatched) {
         alert('이미 해당 소환사에 대한  패치가 적용중입니다.');
@@ -39,11 +40,10 @@ const Controller = ({ onClose }) => {
         addList({ id: targetId, percentage: targetPercentage, key: targetKey });
       }
     } else {
-      if (
-        !targetId.replaceAll(' ', '').includes('#') ||
-        targetId.split('#')[1] === ''
-      ) {
+      if (!targetId.includes('#') || targetId.split('#')[1] === '') {
         alert('소환사 태그를 입력해주세요.');
+      } else if (targetId.includes(' ')) {
+        alert('띄어쓰기를 제거한 후 다시 입력해주세요.');
       } else {
         alert('소환사 닉네임 또는 소환사 태그에 부적절한 문자가 있습니다.');
       }
@@ -66,6 +66,7 @@ const Controller = ({ onClose }) => {
   const handleDeletePatch = (index) => {
     removeList(index);
   };
+  // Tooltip
 
   const mouseEnterInDisabledAtPlayerInput = () => {
     if (isDisabled) {
