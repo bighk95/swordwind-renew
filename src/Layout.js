@@ -26,6 +26,7 @@ const Layout = () => {
 
   const handleSearch = async (e) => {
     e?.preventDefault();
+    setIsLoading(true);
 
     let [playerName, tagName] = e.target.name.value.split('#');
     tagName = tagName || '';
@@ -70,6 +71,8 @@ const Layout = () => {
       setMatches([]);
       setMessage('검색 결과가 없습니다. ID와 Tag를 확인해주세요.');
       return;
+    } finally {
+      setIsLoading(false);
     }
   };
 

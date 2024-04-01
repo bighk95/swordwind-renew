@@ -1,8 +1,7 @@
 import './App.css';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Layout from './Layout';
 import ScaleProvider from './context/ScaleContext';
-import { search } from './api/summoner';
 
 function App() {
   return (

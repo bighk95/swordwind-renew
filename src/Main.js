@@ -47,12 +47,16 @@ const Main = ({ loading, matches = [], myName }) => {
     </StyledResultContainer>
   );
 };
+
 const LoadingResultContainer = styled.div`
+  transition: margin-top 0.75s;
+  margin-top: 0px;
+
   ${(props) =>
     props.isFirst &&
-    props.loading &&
     css`
-      margin-top: 200px;
+      margin-top: ${props.loading ? '200px' : '0px'};
+      transition: margin-top 0.75s;
     `}
 `;
 
