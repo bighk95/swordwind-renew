@@ -1,19 +1,18 @@
 import React from 'react';
 import Header from './Header';
 import Main from './Main';
-import { useSearchParams, useParams, useBeforeunload } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import MainImage from './img/riot-games-self-publish-league-legends-teamfight-tactics-southeast-asia.png';
 import NotFound from './NotFound';
 import Controller from './Controller';
 import Img from './img/img.js';
 import { search, update } from './api/summoner.js';
-import Loader from './Loader.js';
 
 const Layout = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [id, setId] = useState(searchParams.get('name') || '');
   const [matches, setMatches] = useState([]);
   const [message, setMessage] = useState('');
@@ -21,7 +20,6 @@ const Layout = () => {
   const navigate = useNavigate();
   const [isControllerOpen, setIsControllerOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
   const closeController = () => {
