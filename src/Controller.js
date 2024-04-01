@@ -1,6 +1,7 @@
 import { React, useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { ScaleContext } from './context/ScaleContext';
+import Img from './img/Img';
 
 const Controller = ({ onClose }) => {
   const [targetId, setTargetId] = useState('');
@@ -169,7 +170,7 @@ const Controller = ({ onClose }) => {
           {parseList?.map((patch, index) => {
             return (
               <IndivController key={index}>
-                <img src={require(`./img/check.webp`)} alt="list" />
+                <img src={Img.Check} alt="list" />
                 <IndivContainer>
                   <AppliedIdContainer>
                     <AppliedId>{patch.id}</AppliedId>
@@ -179,19 +180,19 @@ const Controller = ({ onClose }) => {
                   </AppliedPercentage>
                   {patch.percentage >= 1 ? (
                     <img
-                      src={require(`./img/scaleUpArrow.png`)}
+                      src={Img.ScaleUpArrow}
                       alt="scaleUpArrow"
                       style={{ width: '20px', height: '20px' }}
                     />
                   ) : (
                     <img
-                      src={require(`./img/scaleDownArrow.png`)}
+                      src={Img.ScaleDownArrow}
                       alt="scaleDownArrow"
                       style={{ width: '20px', height: '20px' }}
                     />
                   )}
                   <DeleteAppliedPatch
-                    src={require(`./img/exit.png`)}
+                    src={Img.Exit}
                     alt="deleteAppliedPatch"
                     onClick={() => {
                       handleDeletePatch(index);
@@ -203,7 +204,7 @@ const Controller = ({ onClose }) => {
           })}
         </AppliedPatchContainer>
         <Reset
-          src={require(`./img/reset.png`)}
+          src={Img.Reset}
           alt="reset"
           onClick={(e) => {
             e.stopPropagation();
@@ -214,11 +215,7 @@ const Controller = ({ onClose }) => {
             }
           }}
         />
-        <Exit
-          src={require(`./img/exit.png`)}
-          alt="exit"
-          onClick={onClose}
-        ></Exit>
+        <Exit src={Img.Exit} alt="exit" onClick={onClose}></Exit>
       </Modal>
     </ModalContainer>
   );

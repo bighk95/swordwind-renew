@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import Img from './img/img';
+import Img from './img/Img';
 const NotFound = () => {
   const navigate = useNavigate();
   return (

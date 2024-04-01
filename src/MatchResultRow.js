@@ -3,7 +3,7 @@ import PlayerDetailsCard from './PlayerDetailsCard';
 import PlayerCard from './PlayerCard';
 import styled from 'styled-components';
 import { ScaleContext } from './context/ScaleContext';
-
+import Img from './img/Img';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -178,11 +178,7 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
           onClick={ShowMatchDetailsButton}
           $matchdetailsopen={matchDetailsOpen}
         >
-          <img
-            className="arrow"
-            src={require(`./img/downArrow.png`)}
-            alt="detailButton"
-          />
+          <img className="arrow" src={Img.DownArrow} alt="detailButton" />
         </ShowMatchDetails>
       )}
     </Container>

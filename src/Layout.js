@@ -5,10 +5,9 @@ import { useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import MainImage from './img/riot-games-self-publish-league-legends-teamfight-tactics-southeast-asia.png';
 import NotFound from './NotFound';
 import Controller from './Controller';
-import Img from './img/img.js';
+import Img from './img/Img.js';
 import { search, update } from './api/summoner.js';
 
 const Layout = () => {
@@ -176,7 +175,7 @@ const Layout = () => {
 const StyledBackground = styled.div`
   width: 100%;
   min-height: 100vh;
-  background-image: url(${MainImage});
+  background-image: url(${Img.HomeBackground});
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
