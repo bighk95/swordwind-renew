@@ -8,8 +8,6 @@ import styled from 'styled-components';
 import MainImage from './img/riot-games-self-publish-league-legends-teamfight-tactics-southeast-asia.png';
 import NotFound from './NotFound';
 import Controller from './Controller';
-import getMatchNumberList from './api/getMatchNumberList';
-import getMatchDetail from './api/getMatchDetail';
 import Img from './img/img.js';
 import { search, update } from './api/summoner.js';
 import Loader from './Loader.js';
@@ -108,7 +106,6 @@ const Layout = () => {
   const handleUpdate = async (e) => {
     setIsLoading(true);
     setError(null);
-
     e?.preventDefault();
     const playerName = id.split('#')[0];
     const tagName = id.split('#')[1];
@@ -127,6 +124,7 @@ const Layout = () => {
   return (
     <StyledBackground onClick={closeController}>
       <Header
+        setMatches={setMatches}
         handleSearch={handleSearch}
         message={message}
         handleUpdate={handleUpdate}

@@ -1,6 +1,6 @@
 import React from 'react';
 import MatchResultRow from './MatchResultRow';
-import styled from 'styled-components';
+import { styled, css } from 'styled-components';
 import Loader from './Loader';
 
 const Main = ({ loading, matches = [], myName }) => {
@@ -8,7 +8,7 @@ const Main = ({ loading, matches = [], myName }) => {
     <StyledResultContainer>
       <StyledResult>
         {loading && <Loader />}
-        {matches.map((match, key) => {
+        {matches.map((match, index) => {
           const myTeamId = match.find((item) => {
             return (
               (
@@ -30,18 +30,31 @@ const Main = ({ loading, matches = [], myName }) => {
           })?.win;
 
           return (
-            <MatchResultRow
-              key={key}
-              matchInfo={match}
-              myTeamId={myTeamId}
-              isWin={isWin}
-            />
+            <LoadingResultContainer
+              key={index}
+              isFirst={index === 0}
+              loading={loading}
+            >
+              <MatchResultRow
+                matchInfo={match}
+                myTeamId={myTeamId}
+                isWin={isWin}
+              />
+            </LoadingResultContainer>
           );
         })}
       </StyledResult>
     </StyledResultContainer>
   );
 };
+const LoadingResultContainer = styled.div`
+  ${(props) =>
+    props.isFirst &&
+    props.loading &&
+    css`
+      margin-top: 200px;
+    `}
+`;
 
 const StyledResultContainer = styled.div`
   display: flex;

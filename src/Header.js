@@ -1,20 +1,41 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
-const Header = ({ handleSearch, handleUpdate, message }) => {
+const Header = ({ handleSearch, handleUpdate, message, setMatches }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const inputRef = useRef(null);
+  const name = searchParams.get('name');
+
+  useEffect(() => {
+    if (!inputRef.current) {
+      return;
+    }
+    if (!name) {
+      inputRef.current.value = '';
+    }
+  }, [name]);
+
   return (
     <div>
       <StyledContainer>
-        <StyledTitle to="/">
+        <StyledTitle
+          to="/"
+          onClick={() => {
+            inputRef.current.value = '';
+            setMatches([]);
+          }}
+        >
           <h1>칼바람 나락 기여도 랭킹</h1>
         </StyledTitle>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <form onSubmit={handleSearch}>
             <StyledInput
+              ref={inputRef}
               type="text"
               name="name"
               placeholder="소환사 이름 + #KR1"
+              defaultValue={name}
             ></StyledInput>
             <StyledButton type="submit">검색</StyledButton>
           </form>
