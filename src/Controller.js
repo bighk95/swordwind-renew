@@ -31,7 +31,6 @@ const Controller = ({ onClose }) => {
     const isValidIdRegx =
       /^[a-zA-Z0-9가-힣\u3400-\u4DBF\u4E00-\u9FFF\u20000-\u2A6DF\u3040-\u309F\u30A0-\u30FF]+#[a-zA-Z0-9가-힣\u3400-\u4DBF\u4E00-\u9FFF\u20000-\u2A6DF\u3040-\u309F\u30A0-\u30FF]+$/;
 
-    // validation, setAppliedPatch
     if (isValidIdRegx.test(targetId)) {
       if (isAlreadyPatched) {
         alert('이미 해당 소환사에 대한  패치가 적용중입니다.');
@@ -67,7 +66,6 @@ const Controller = ({ onClose }) => {
   const handleDeletePatch = (index) => {
     removeList(index);
   };
-  // Tooltip
 
   const mouseEnterInDisabledAtPlayerInput = () => {
     if (isDisabled) {

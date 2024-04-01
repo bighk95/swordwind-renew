@@ -15,7 +15,6 @@ const Layout = () => {
   const [id, setId] = useState(searchParams.get('name') || '');
   const [matches, setMatches] = useState([]);
   const [message, setMessage] = useState('');
-  // const [prevId, setPrevId] = useState(null);
   const navigate = useNavigate();
   const [isControllerOpen, setIsControllerOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -133,7 +132,6 @@ const Layout = () => {
     }
   };
 
-  // result
   return (
     <StyledBackground onClick={closeController}>
       <Header

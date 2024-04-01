@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-// 컨텍스트 생성
 export const ScaleContext = React.createContext();
 
-/**
- * scale  상태관리
- * add 스케일 추가
- * remove 스케일 제거
- */
 const ScaleProvider = ({ children }) => {
   const [scaleList, setScaleList] = useState(
-    sessionStorage.getItem('list') || [],
+    JSON.parse(sessionStorage.getItem('patch') || '[]'),
   );
   const sessionPatch = window.sessionStorage;
   const list = sessionStorage.getItem('patch');
