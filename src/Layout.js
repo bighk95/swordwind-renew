@@ -3,7 +3,7 @@ import Header from './Header';
 import Main from './Main';
 import { useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import NotFound from './NotFound';
 import Controller from './Controller';
@@ -19,6 +19,13 @@ const Layout = () => {
   const [isControllerOpen, setIsControllerOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (window.location.search === '') {
+      setMatches([]);
+    }
+  }, [location]);
 
   const closeController = () => {
     setIsControllerOpen(false);
