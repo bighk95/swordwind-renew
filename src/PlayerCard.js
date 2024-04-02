@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Img from './img/Img.js';
 
-const StyledCard = styled.div`
+const Card = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -37,16 +37,16 @@ const StyledCard = styled.div`
 const PlayerCard = ({ name, score, rank, champ }) => {
   if (champ === 'FiddleSticks') {
     return (
-      <StyledCard>
+      <Card>
         <img className="champ" src={Img.Fiddlesticks} alt="portrait" />
         <div className="name">{name}</div>
         <div className="score">{score}</div>
         <div className="rank">{rank}</div>
-      </StyledCard>
+      </Card>
     );
   } else {
     return (
-      <StyledCard>
+      <Card>
         <img
           className="champ"
           src={`https://opgg-static.akamaized.net/meta/images/lol/14.5.1/champion/${champ}.png`}
@@ -55,7 +55,7 @@ const PlayerCard = ({ name, score, rank, champ }) => {
         <div className="name">{name}</div>
         <div className="score">{score}</div>
         <div className="rank">{rank}</div>
-      </StyledCard>
+      </Card>
     );
   }
 };

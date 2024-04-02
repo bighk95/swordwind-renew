@@ -30,7 +30,7 @@ const Container = styled.div`
   margin-top: 10px;
 `;
 
-const StyledLoaderContainer = styled.div`
+const LoaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,7 +45,7 @@ const StyledLoaderContainer = styled.div`
   margin: 0 auto;
 `;
 
-const StyledLoader = styled.div`
+const LoaderCircle = styled.div`
   border: 6px solid #d0d0d0;
   border-top: 6px solid #0083db;
   border-radius: 50%;
@@ -60,8 +60,8 @@ const Loader = () => {
   return (
     <>
       <Container>
-        <StyledLoader />
-        <StyledLoaderContainer></StyledLoaderContainer>
+        <LoaderCircle />
+        <LoaderContainer></LoaderContainer>
       </Container>
     </>
   );

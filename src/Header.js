@@ -24,8 +24,8 @@ const Header = ({
 
   return (
     <div>
-      <StyledContainer>
-        <StyledTitle
+      <Container>
+        <Title
           to="/"
           onClick={() => {
             inputRef.current.value = '';
@@ -34,20 +34,20 @@ const Header = ({
           }}
         >
           <h1>칼바람 나락 기여도 랭킹</h1>
-        </StyledTitle>
+        </Title>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <form onSubmit={handleSearch}>
-            <StyledInput
+            <Input
               ref={inputRef}
               type="text"
               name="name"
               placeholder="소환사 이름 + #KR1"
               defaultValue={name}
-            ></StyledInput>
-            <StyledButton type="submit">검색</StyledButton>
+            ></Input>
+            <Button type="submit">검색</Button>
           </form>
           <form onSubmit={handleUpdate}>
-            <StyledButton type="submit">전적갱신</StyledButton>
+            <Button type="submit">전적갱신</Button>
           </form>
         </div>
 
@@ -61,29 +61,29 @@ const Header = ({
         >
           {message}
         </span>
-      </StyledContainer>
+      </Container>
     </div>
   );
 };
 
-const StyledTitle = styled(Link)`
+const Title = styled(Link)`
   display: inline-block;
   text-decoration-line: none;
   color: black;
 `;
 
-const StyledContainer = styled.div`
+const Container = styled.div`
   padding-top: 30px;
   text-align: center;
 `;
 
-const StyledInput = styled.input`
+const Input = styled.input`
   height: 32px;
   width: 200px;
   text-align: center;
 `;
 
-const StyledButton = styled.button`
+const Button = styled.button`
   text-decoration: none;
   display: inline-block;
   position: relative;

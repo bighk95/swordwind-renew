@@ -5,8 +5,8 @@ import Loader from './Loader';
 
 const Main = ({ loading, matches = [], myName }) => {
   return (
-    <StyledResultContainer>
-      <StyledResult>
+    <ResultContainer>
+      <Result>
         {loading && <Loader />}
         {matches.map((match, index) => {
           const myTeamId = match.find((item) => {
@@ -43,8 +43,8 @@ const Main = ({ loading, matches = [], myName }) => {
             </LoadingResultContainer>
           );
         })}
-      </StyledResult>
-    </StyledResultContainer>
+      </Result>
+    </ResultContainer>
   );
 };
 
@@ -60,12 +60,12 @@ const LoadingResultContainer = styled.div`
     `}
 `;
 
-const StyledResultContainer = styled.div`
+const ResultContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
 
-const StyledResult = styled.div`
+const Result = styled.div`
   text-align: center;
   margin-top: 30px;
   .message {

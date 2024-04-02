@@ -143,7 +143,7 @@ const Layout = () => {
   };
 
   return (
-    <StyledBackground onClick={closeController}>
+    <Background onClick={closeController}>
       <Header
         setMatches={setMatches}
         setMessage={setMessage}
@@ -167,7 +167,7 @@ const Layout = () => {
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       {isControllerOpen && <Controller onClose={closeController} />}
-      <StyledBalanceController
+      <BalanceController
         src={Img.ModalController}
         alt="BalanceController"
         style={{ cursor: 'pointer' }}
@@ -176,11 +176,11 @@ const Layout = () => {
           setIsControllerOpen(!isControllerOpen);
         }}
       />
-    </StyledBackground>
+    </Background>
   );
 };
 
-const StyledBackground = styled.div`
+const Background = styled.div`
   width: 100%;
   min-height: 100vh;
   background-image: url(${Img.HomeBackground});
@@ -192,7 +192,7 @@ const StyledBackground = styled.div`
   opacity: 0.9;
 `;
 
-const StyledBalanceController = styled.img`
+const BalanceController = styled.img`
   position: fixed;
   bottom: 0;
   left: 0;
