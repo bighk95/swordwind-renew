@@ -45,7 +45,7 @@ const Controller = ({ onClose }) => {
       } else if (targetId.includes(' ')) {
         alert('띄어쓰기를 제거한 후 다시 입력해주세요.');
       } else {
-        alert('소환사 닉네임 또는 소환사 태그에 부적절한 문자가 있습니다.');
+        alert('닉네임 혹은 태그에 부적절한 문자가 있거나 잘못된 형식입니다.');
       }
     }
 
