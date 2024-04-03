@@ -58,9 +58,9 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
   const backgroundSetting = (matchFinalResult, isButtonHovered) => {
     if (matchFinalResult) {
       if (isButtonHovered) {
-        return '#AEDCFA';
+        return '#9AD4FA';
       } else {
-        return '#D6ECFA';
+        return '#C2E3FA';
       }
     } else {
       if (isButtonHovered) {
