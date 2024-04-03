@@ -119,11 +119,42 @@ const Layout = () => {
   };
 
   useEffect(() => {
-    if (id) {
-      const [playerName, tagName] = id.split('#');
-      reHandleSearch(playerName, tagName);
-    }
-  }, [id]);
+    const handlePopState = async () => {
+      const searchName = new URLSearchParams(window.location.search).get(
+        'name',
+      );
+      if (searchName) {
+        const [playerName, tagName] = searchName.split('#');
+        setId(searchName);
+        setIsLoading(true);
+        try {
+          const matchListResponse = await search(playerName, tagName || '');
+          const foundData = matchListResponse.data;
+          for (let i = 0; i < foundData.length; i++) {
+            for (let j = 0; j < foundData[i].length; j++) {
+              foundData[i][j].totalScoreScale = Math.round(
+                foundData[i][j].totalDamageDealtToChampions +
+                  foundData[i][j].totalDamageTaken * 0.4 +
+                  foundData[i][j].totalHeal * 0.2,
+              );
+            }
+          }
+          setMatches(foundData);
+          setMessage(
+            foundData.length > 0
+              ? ''
+              : '최신 정보가 없습니다. 전적 갱신을 해주세요.',
+          );
+        } catch (error) {
+          setMatches([]);
+          setMessage('검색 결과가 없습니다. ID와 Tag를 확인해주세요.');
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+  }, []);
 
   const handleUpdate = async (e) => {
     setIsLoading(true);

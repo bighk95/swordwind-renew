@@ -17,9 +17,7 @@ const Header = ({
     if (!inputRef.current) {
       return;
     }
-    if (!name) {
-      inputRef.current.value = '';
-    }
+    inputRef.current.value = name || '';
   }, [name]);
 
   return (
@@ -30,7 +28,7 @@ const Header = ({
           onClick={() => {
             inputRef.current.value = '';
             setMatches([]);
-            setMessage([]);
+            setMessage('');
           }}
         >
           <h1>칼바람 나락 기여도 랭킹</h1>
