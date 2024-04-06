@@ -1,4 +1,6 @@
-<img width="862" alt="image" src="https://github.com/bighk95/swordwind-renew/assets/117927349/8179f438-5af9-4696-8ff1-e5c559556bc4"># Swordwind-renew
+# Swordwind-renew
+
+<img width="862" alt="image" src="https://github.com/bighk95/swordwind-renew/assets/117927349/8179f438-5af9-4696-8ff1-e5c559556bc4">
 칼바람 나락 플레이어별 기여도를 산정하여 순위를 책정합니다.
 
 ## 기능명세
