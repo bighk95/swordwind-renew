@@ -34,12 +34,12 @@
 
 <img width="865" alt="image" src="https://github.com/bighk95/swordwind-renew/assets/117927349/969a9eb2-143c-40ed-81a6-7d665ca87c23">
 
-- 유저의 ID, TAG를 입력하면 해당 유저에게 페널티, 어드밴티지를 적용시킨 결과값을 볼 수 있습니다.
+- 유저의 ID, TAG를 입력하면 해당 유저에게 페널티, 어드밴티지를 적용할 수 있습니다.
 
 ---
 
-<img width="869" alt="image" src="https://github.com/bighk95/swordwind-renew/assets/117927349/6c14bf9e-906e-410f-bb90-1625a182cbdb">
+<img width="864" alt="image" src="https://github.com/bighk95/swordwind-renew/assets/117927349/086581b8-2140-4d2e-913d-7da64c692ef6">
 
-- 적용되어있는 패치 내역을 한눈에 볼 수 있으며, 1을 기준으로 페널티, 어드밴티지를 확인할 수 있게 화살표를 추가하여 편의성을 개선하였습니다.
+- 적용되어있는 패치 내역을 한눈에 볼 수 있으며, 1( 100% )을 기준으로 페널티, 어드밴티지를 확인할 수 있게 화살표를 추가하여 편의성을 개선하였습니다.
 
 - 적용되어있는 패치 내역을 개별삭제, 일괄삭제 할 수 있습니다.
