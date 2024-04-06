@@ -1,4 +1,6 @@
-<img width="869" alt="image" src="https://github.com/bighk95/swordwind-renew/assets/117927349/4f8ece3c-b179-4077-89eb-ad8cc6492207"># Swordwind-renew
+# Swordwind-renew
+
+<img width="869" alt="image" src="https://github.com/bighk95/swordwind-renew/assets/117927349/4f8ece3c-b179-4077-89eb-ad8cc6492207">
 
 **배포 링크 : https://bighk95.github.io/swordwind-renew**
 
