@@ -1,6 +1,7 @@
 # Swordwind-renew
 
-*배포 링크 : https://bighk95.github.io/swordwind-renew*
+**배포 링크 : https://bighk95.github.io/swordwind-renew**
+
 칼바람 나락 플레이어별 기여도를 산정하여 순위를 책정합니다.
 
 ## 기능명세
