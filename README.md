@@ -1,7 +1,5 @@
 # Swordwind-renew
 
-<img width="869" alt="image" src="https://github.com/bighk95/swordwind-renew/assets/117927349/4f8ece3c-b179-4077-89eb-ad8cc6492207">
-
 **배포 링크 : https://bighk95.github.io/swordwind-renew**
 
 칼바람 나락 플레이어별 기여도를 산정하여 순위를 책정합니다.
