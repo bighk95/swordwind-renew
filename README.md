@@ -60,3 +60,12 @@
 
 - 해당 유저가 실제로 존재하는 유저이지만, 데이터가 없는 경우 전적 갱신을 하여 데이터를 받아오도록 하였습니다.
 
+---
+
+<img width="865" alt="image" src="https://github.com/bighk95/swordwind-renew/assets/117927349/e9ea43e1-2526-4be0-8ea1-97fd5ee74212">
+
+- 해당 유저가 실제로 존재하지 않는 유저라면, ID 및 TAG 를 확인하도록 하였습니다.
+
+---
+
+
