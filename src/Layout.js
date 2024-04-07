@@ -119,14 +119,14 @@ const Layout = () => {
   };
 
   useEffect(() => {
-    const handlePopState = async () => {
+    const loadDataBasedOnURL = async () => {
       const searchName = new URLSearchParams(window.location.search).get(
         'name',
       );
       if (searchName) {
+        setIsLoading(true);
         const [playerName, tagName] = searchName.split('#');
         setId(searchName);
-        setIsLoading(true);
         try {
           const matchListResponse = await search(playerName, tagName || '');
           const foundData = matchListResponse.data;
@@ -153,7 +153,16 @@ const Layout = () => {
         }
       }
     };
+    loadDataBasedOnURL();
+
+    const handlePopState = () => {
+      loadDataBasedOnURL();
+    };
     window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
   }, []);
 
   const handleUpdate = async (e) => {
