@@ -42,15 +42,21 @@
 
 - 적용되어있는 패치 내역을 개별삭제, 일괄삭제 할 수 있습니다.
 
+---
+
 <img width="886" alt="image" src="https://github.com/bighk95/swordwind-renew/assets/117927349/65313088-5285-451c-a8bd-15e50fdad07c">
 
 - 새로고침 없이 변화된 결과값을 실시간으로 적용, 적용해제하여 유저끼리 더 재밌게 플레이 할 수 있도록 하였습니다.
 
 - 세션 스토리지를 연결하여 새로고침 하거나 다른 플레이어를 검색하여도 적용된 패치가 남아있도록 하였습니다.
 
+---
+
 <img width="868" alt="image" src="https://github.com/bighk95/swordwind-renew/assets/117927349/108f1fd0-8fd4-477a-aff3-30c6daf3a3c8">
 
 <img width="864" alt="image" src="https://github.com/bighk95/swordwind-renew/assets/117927349/8291fa99-8e05-4f77-b97c-8155d3b23429">
+
+<img width="866" alt="image" src="https://github.com/bighk95/swordwind-renew/assets/117927349/63198fa9-8356-4605-8ada-76a061e97d1a">
 
 - 해당 유저가 실제로 존재하는 유저이지만, 데이터가 없는 경우 전적 갱신을 하여 데이터를 받아오도록 하였습니다.
 
