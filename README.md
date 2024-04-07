@@ -47,3 +47,10 @@
 - 새로고침 없이 변화된 결과값을 실시간으로 적용, 적용해제하여 유저끼리 더 재밌게 플레이 할 수 있도록 하였습니다.
 
 - 세션 스토리지를 연결하여 새로고침 하거나 다른 플레이어를 검색하여도 적용된 패치가 남아있도록 하였습니다.
+
+<img width="868" alt="image" src="https://github.com/bighk95/swordwind-renew/assets/117927349/108f1fd0-8fd4-477a-aff3-30c6daf3a3c8">
+
+<img width="864" alt="image" src="https://github.com/bighk95/swordwind-renew/assets/117927349/8291fa99-8e05-4f77-b97c-8155d3b23429">
+
+- 해당 유저가 실제로 존재하는 유저이지만, 데이터가 없는 경우 전적 갱신을 하여 데이터를 받아오도록 하였습니다.
+
