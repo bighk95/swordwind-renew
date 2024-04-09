@@ -173,7 +173,6 @@ const Layout = () => {
     const tagName = id.split('#')[1];
 
     try {
-      await update(playerName, tagName);
       await reHandleSearch(playerName, tagName);
     } catch (error) {
       setError(error);
