@@ -29,7 +29,7 @@ const Controller = ({ onClose }) => {
     );
 
     const isValidIdRegx =
-      /^[a-zA-Z0-9가-힣\u3400-\u4DBF\u4E00-\u9FFF\u20000-\u2A6DF\u3040-\u309F\u30A0-\u30FF]+#[a-zA-Z0-9가-힣\u3400-\u4DBF\u4E00-\u9FFF\u20000-\u2A6DF\u3040-\u309F\u30A0-\u30FF]+$/;
+      /^[a-zA-Z0-9가-힣\u3400-\u4DBF\u4E00-\u9FFF\u20000-\u2A6DF\u3040-\u309F\u30A0-\u30FF]+$/;
 
     // validation, setAppliedPatch
     if (isValidIdRegx.test(targetId)) {
@@ -40,12 +40,10 @@ const Controller = ({ onClose }) => {
         addList({ id: targetId, percentage: targetPercentage, key: targetKey });
       }
     } else {
-      if (!targetId.includes('#') || targetId.split('#')[1] === '') {
-        alert('소환사 태그를 입력해주세요.');
-      } else if (targetId.includes(' ')) {
+      if (targetId.includes(' ')) {
         alert('띄어쓰기를 제거한 후 다시 입력해주세요.');
       } else {
-        alert('닉네임 혹은 태그에 부적절한 문자가 있거나 잘못된 형식입니다.');
+        alert('닉네임에 부적절한 문자가 있거나 잘못된 형식입니다.');
       }
     }
 
@@ -110,7 +108,7 @@ const Controller = ({ onClose }) => {
                 onMouseLeave={mouseLeaveInDisabledAtPlayerInput}
               >
                 <PlayerInput
-                  placeholder="소환사 이름 + #KR1"
+                  placeholder="소환사 이름"
                   value={targetId}
                   onChange={handleInputId}
                   disabled={isDisabled}

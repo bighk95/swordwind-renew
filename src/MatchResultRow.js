@@ -89,19 +89,19 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
             (a, b) =>
               Math.round(
                 scaleMap[
-                  `${b.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${b.summoner.tagLine.toLowerCase()}`
+                  `${b.summoner.gameName.toLowerCase().replaceAll(' ', '')}`
                 ]
                   ? scaleMap[
-                      `${b.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${b.summoner.tagLine.toLowerCase()}`
+                      `${b.summoner.gameName.toLowerCase().replaceAll(' ', '')}`
                     ] * b.totalScoreScale
                   : 1 * b.totalScoreScale,
               ) -
               Math.round(
                 scaleMap[
-                  `${a.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${a.summoner.tagLine.toLowerCase()}`
+                  `${a.summoner.gameName.toLowerCase().replaceAll(' ', '')}`
                 ]
                   ? scaleMap[
-                      `${a.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${a.summoner.tagLine.toLowerCase()}`
+                      `${a.summoner.gameName.toLowerCase().replaceAll(' ', '')}`
                     ] * a.totalScoreScale
                   : 1 * a.totalScoreScale,
               ),
@@ -116,11 +116,11 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
                   .replaceAll(' ', '')}
                 score={
                   scaleMap[
-                    `${summoner.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${summoner.summoner.tagLine.toLowerCase()}`
+                    `${summoner.summoner.gameName.toLowerCase().replaceAll(' ', '')}`
                   ]
                     ? Math.round(
                         scaleMap[
-                          `${summoner.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${summoner.summoner.tagLine.toLowerCase()}`
+                          `${summoner.summoner.gameName.toLowerCase().replaceAll(' ', '')}`
                         ] * summoner.totalScoreScale,
                       )
                     : summoner.totalScoreScale
@@ -140,20 +140,20 @@ const MatchResultRow = ({ matchInfo, myTeamId, isWin }) => {
                 Math.round(
                   b.totalScoreScale *
                     scaleMap[
-                      `${b.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${b.summoner.tagLine.toLowerCase()}`
+                      `${b.summoner.gameName.toLowerCase().replaceAll(' ', '')}`
                     ]
                     ? scaleMap[
-                        `${b.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${b.summoner.tagLine.toLowerCase()}`
+                        `${b.summoner.gameName.toLowerCase().replaceAll(' ', '')}`
                       ] * b.totalScoreScale
                     : 1 * b.totalScoreScale,
                 ) -
                 Math.round(
                   a.totalScoreScale *
                     scaleMap[
-                      `${a.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${a.summoner.tagLine.toLowerCase()}`
+                      `${a.summoner.gameName.toLowerCase().replaceAll(' ', '')}`
                     ]
                     ? scaleMap[
-                        `${a.summoner.gameName.toLowerCase().replaceAll(' ', '')}#${a.summoner.tagLine.toLowerCase()}`
+                        `${a.summoner.gameName.toLowerCase().replaceAll(' ', '')}`
                       ] * a.totalScoreScale
                     : 1 * a.totalScoreScale,
                 ),
