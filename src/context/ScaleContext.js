@@ -6,25 +6,28 @@ const ScaleProvider = ({ children }) => {
   const [scaleList, setScaleList] = useState(
     JSON.parse(sessionStorage.getItem('patch') || '[]'),
   );
-  const sessionPatch = window.sessionStorage;
-  const list = sessionStorage.getItem('patch');
-  const parseList = JSON.parse(list);
-  const scaleMap = {};
+  const [scaleMap, setScaleMap] = useState({});
 
   useEffect(() => {
+    let mapdata = {};
     scaleList?.forEach((scale) => {
-      Object.defineProperty(scaleMap, scale.id.toLowerCase(), {
+      Object.defineProperty(mapdata, scale.id.toLowerCase(), {
         value: parseFloat(scale.percentage),
         writable: true,
       });
     });
-  }, [parseList]);
+
+    setScaleMap(mapdata);
+  }, [scaleList.length]);
+
+  // remove -> 다른 상태가 같이 바뀌면서 -> rerender
+  // add -> 다른 상태가 같이 바뀌면서 -> 그때 바뀌던거
 
   const addList = (scale) => {
     setScaleList((prevList) => {
       const newList = [...prevList, { ...scale }];
       const stringfy = JSON.stringify(newList);
-      sessionPatch.setItem('patch', stringfy);
+      sessionStorage.setItem('patch', stringfy);
       return newList;
     });
   };
@@ -33,14 +36,14 @@ const ScaleProvider = ({ children }) => {
     setScaleList((prevList) => {
       const newList = prevList.filter((item, idx) => index !== idx);
       const stringfy = JSON.stringify(newList);
-      sessionPatch.setItem('patch', stringfy);
+      sessionStorage.setItem('patch', stringfy);
       return newList;
     });
   };
 
   const resetList = () => {
     setScaleList([]);
-    sessionPatch.clear();
+    sessionStorage.clear();
   };
 
   return (
@@ -48,7 +51,6 @@ const ScaleProvider = ({ children }) => {
       value={{
         scaleList,
         scaleMap,
-        parseList,
         addList,
         removeList,
         resetList,

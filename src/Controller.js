@@ -7,7 +7,7 @@ const Controller = ({ onClose }) => {
   const [targetId, setTargetId] = useState('');
   const [targetPercentage, setTargetPercentage] = useState('');
   const [targetKey, setTargetKey] = useState(0);
-  const { scaleList, addList, removeList, resetList, scaleMap, parseList } =
+  const { addList, removeList, resetList, scaleList } =
     useContext(ScaleContext);
   const [isDisabled, setIsDisabled] = useState(false);
   const [showTooltipAtPlayerInput, setShowTooltipAtPlayerInput] =
@@ -18,11 +18,11 @@ const Controller = ({ onClose }) => {
     useState(false);
 
   useEffect(() => {
-    parseList?.length >= 5 ? setIsDisabled(true) : setIsDisabled(false);
-  }, [parseList]);
+    scaleList?.length >= 5 ? setIsDisabled(true) : setIsDisabled(false);
+  }, [scaleList]);
 
   const apply = () => {
-    const isAlreadyPatched = parseList?.some(
+    const isAlreadyPatched = scaleList?.some(
       (patch) =>
         patch.id.replaceAll(' ', '').toLowerCase() ===
         targetId.replaceAll(' ', '').toLowerCase(),
@@ -31,7 +31,6 @@ const Controller = ({ onClose }) => {
     const isValidIdRegx =
       /^[a-zA-Z0-9가-힣\u3400-\u4DBF\u4E00-\u9FFF\u20000-\u2A6DF\u3040-\u309F\u30A0-\u30FF]+$/;
 
-    // validation, setAppliedPatch
     if (isValidIdRegx.test(targetId)) {
       if (isAlreadyPatched) {
         alert('이미 해당 소환사에 대한  패치가 적용중입니다.');
@@ -142,8 +141,7 @@ const Controller = ({ onClose }) => {
             onMouseLeave={mouseLeaveInDisabledAtApplyButton}
           >
             <Apply
-              onClick={(e) => {
-                e.stopPropagation();
+              onClick={() => {
                 apply();
               }}
               disabled={isDisabled}
@@ -164,7 +162,7 @@ const Controller = ({ onClose }) => {
             <Subject1>소환사 닉네임</Subject1>
             <Subject2>패치 비율</Subject2>
           </SubjectContainer>
-          {parseList?.map((patch, index) => {
+          {scaleList?.map((patch, index) => {
             return (
               <IndivController key={index}>
                 <img src={Img.Check} alt="list" />
@@ -203,8 +201,7 @@ const Controller = ({ onClose }) => {
         <Reset
           src={Img.Reset}
           alt="reset"
-          onClick={(e) => {
-            e.stopPropagation();
+          onClick={() => {
             if (window.confirm('모든 패치를 초기화하시겠습니까?')) {
               alert('모든 패치를 초기화하였습니다.');
               resetList();
