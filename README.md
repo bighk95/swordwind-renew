@@ -72,19 +72,17 @@
 
 ### 페이지 이동에 따른 검색 input value 변경하기.
 
-```
+```javascript
+const [searchParams, setSearchParams] = useSearchParams();
+const inputRef = useRef(null);
+const name = searchParams.get('name');
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const inputRef = useRef(null);
-  const name = searchParams.get('name');
-
-  useEffect(() => {
-    if (!inputRef.current) {
-      return;
-    }
-    inputRef.current.value = name || '';
-  }, [name]);
-
+useEffect(() => {
+  if (!inputRef.current) {
+    return;
+  }
+  inputRef.current.value = name || '';
+}, [name]);
 ```
 
 유저에 대한 검색 기능은 정상적으로 동작하였으나, 다수의 유저들에 대한 검색을 진행한 후, 뒤로 가기 또는 앞으로 가기를 하였을때
@@ -92,12 +90,12 @@
 
 예를들어,
 A 유저에 대한 검색을 진행했을때,
-https://bighk95.github.io/swordwind-renew?name=A url로 이동하며, A에 대한 매치데이터를 출력한다.
+`https://bighk95.github.io/swordwind-renew?name=A` url로 이동하며, A에 대한 매치데이터를 출력한다.
 검색 input의 value는 검색 타겟 ID인 'A'로 설정된다.
 
 그 후에 B 유저에 대한 검색을 진행했을때,
-https://bighk95.github.io/swordwind-renew?name=B url로 이동하며, B에 대한 매치데이터를 출력한다.
+`https://bighk95.github.io/swordwind-renew?name=B` url로 이동하며, B에 대한 매치데이터를 출력한다.
 검색 input의 value는 검색 타겟 ID인 'B'로 설정된다.
 
 그 후에 뒤로가기를 하였을때, A 유저를 검색했을때의 url로 이동하며, A 유저에 대한 매치데이터를 출력하지만,
-검색의 <span style="color: red">input의 value는 검색 타겟 ID인 'A'가 아닌 'B'로 설정</span>되어있다.
+검색의 <span style="color:red">input의 value는 검색 타겟 ID인 'A'가 아닌 'B'로 설정</span>되어있다.
