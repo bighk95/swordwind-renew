@@ -100,4 +100,4 @@ https://bighk95.github.io/swordwind-renew?name=B url로 이동하며, B에 대�
 검색 input의 value는 검색 타겟 ID인 'B'로 설정된다.
 
 그 후에 뒤로가기를 하였을때, A 유저를 검색했을때의 url로 이동하며, A 유저에 대한 매치데이터를 출력하지만,
-검색의 <span style="color : red">input의 value는 검색 타겟 ID인 'A'가 아닌 'B'로 설정</span>되어있다.
+검색의 <span style="color: red">input의 value는 검색 타겟 ID인 'A'가 아닌 'B'로 설정</span>되어있다.
