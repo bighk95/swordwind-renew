@@ -68,9 +68,12 @@
 
 ---
 
-## 페이지 이동에 따른 검색 input value 변경하기.
+##
+
+### 페이지 이동에 따른 검색 input value 변경하기.
 
 ```
+
   const [searchParams, setSearchParams] = useSearchParams();
   const inputRef = useRef(null);
   const name = searchParams.get('name');
@@ -81,4 +84,5 @@
     }
     inputRef.current.value = name || '';
   }, [name]);
+
 ```
