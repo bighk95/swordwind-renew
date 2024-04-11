@@ -68,8 +68,17 @@
 
 ---
 
-## 구분없는 경계선 구현하기.
+## 페이지 이동에 따른 검색 input value 변경하기.
 
 ```
-let a = b;
+  const [searchParams, setSearchParams] = useSearchParams();
+  const inputRef = useRef(null);
+  const name = searchParams.get('name');
+
+  useEffect(() => {
+    if (!inputRef.current) {
+      return;
+    }
+    inputRef.current.value = name || '';
+  }, [name]);
 ```
