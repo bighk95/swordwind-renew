@@ -101,6 +101,8 @@ A 유저에 대한 검색을 진행했을때,
 
 이를 해결하기 위해 useSearchParams()를 사용하여 쿼리 스트링의 name을 저장하고, useRef로 Input DOM에 직접적으로 접근하여, name이 없다면, Input의 value를 ''로 설정하고, name이 있다면, Input의 value를 name으로 설정하게 하였다. 그렇게하여 앞으로 가기나 뒤로 가기를 하였을때, name값을 받아 input value를 다시 설정한다.
 
+---
+
 ### sessionStorage와 Context API
 
 ```javascript
