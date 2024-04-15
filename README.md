@@ -162,3 +162,7 @@ const ScaleProvider = ({ children }) => {
   );
 };
 ```
+
+유저에 대한 밸런스 패치를 적용할 때, 컨트롤러에서 설정한 데이터 ( props )를 자식 컴포넌트로 내려주는것이 아닌, 렌더링하는 부모 컴포넌트로 올려주는 작업을 해야했고, 컴포넌트의 트리 구조가 복잡해짐에 따라 props를 전달하고 받는 과정이 복잡하게 느껴졌고, props를 사용하기 위해서가 아닌 더 하위의 자식 컴포넌트로 props를 전달하기 위해 props를 받는 컴포넌트들도 생기면서 props의 전달이 비효율적이다라고 생각하여, Context API를 사용하였다.
+
+또한, 밸런스 패치를 적용한 내용 ( ID와 ID에 적용할 밸런스 패치 Percentage )이 새로고침, 다른 유저의 검색을 진행하면 적용한 내용이 사라지는것을 개선하기 위해서 sessionStorage를 적용하였다. localStorage와 유사하지만 localStorage는 브라우저를 종료하여도 밸런스 패치의 적용을 유지하기 때문에 localStorage 보다는 sessionStorage의 적용이 더 기능과 잘 어울리겠다고 생각했다.
