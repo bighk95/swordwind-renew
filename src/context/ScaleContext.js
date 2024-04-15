@@ -20,9 +20,6 @@ const ScaleProvider = ({ children }) => {
     setScaleMap(mapdata);
   }, [scaleList.length]);
 
-  // remove -> 다른 상태가 같이 바뀌면서 -> rerender
-  // add -> 다른 상태가 같이 바뀌면서 -> 그때 바뀌던거
-
   const addList = (scale) => {
     setScaleList((prevList) => {
       const newList = [...prevList, { ...scale }];
