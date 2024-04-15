@@ -108,13 +108,15 @@ A 유저에 대한 검색을 진행했을때,
 ```javascript
 const ScaleProvider = ({ children }) => {
   const [scaleList, setScaleList] = useState(
-    JSON.parse(sessionStorage.getItem('patch') || '[]'),
+    JSON.parse(sessionStorage.getItem('patch') || '[]'), // patch 키로 저장된 값을 JSON으로 파싱
   );
   const [scaleMap, setScaleMap] = useState({});
 
+  // mapdata 객체에 각 scale의 id를 소문자로 변환한 것을 키로, percentage를 숫자로 변환한 것을 값으로 추가
   useEffect(() => {
     let mapdata = {};
     scaleList?.forEach((scale) => {
+      //
       Object.defineProperty(mapdata, scale.id.toLowerCase(), {
         value: parseFloat(scale.percentage),
         writable: true,
@@ -147,8 +149,9 @@ const ScaleProvider = ({ children }) => {
     sessionStorage.clear();
   };
 
+  // ScaleProvider 컴포넌트가 자식 컴포넌트들에게 ScaleConetxt를 통해서 value안의 변수나 함수 혹은 상태를 제공
   return (
-    <ScaleContext.Provider
+    <ScaleContext.Providerㄴ
       value={{
         scaleList,
         scaleMap,
