@@ -100,3 +100,63 @@ A 유저에 대한 검색을 진행했을때,
 그 후에 뒤로가기를 하였을때, A 유저를 검색했을때의 url로 이동하며, A 유저에 대한 매치데이터를 출력하지만, **검색의 input의 value는 검색 타겟 ID인 'A'가 아닌 'B'로 설정되어있는 문제**가 있다.
 
 이를 해결하기 위해 useSearchParams()를 사용하여 쿼리 스트링의 name을 저장하고, useRef로 Input DOM에 직접적으로 접근하여, name이 없다면, Input의 value를 ''로 설정하고, name이 있다면, Input의 value를 name으로 설정하게 하였다. 그렇게하여 앞으로 가기나 뒤로 가기를 하였을때, name값을 받아 input value를 다시 설정한다.
+
+### sessionStorage와 Context API
+
+```javascript
+const ScaleProvider = ({ children }) => {
+  const [scaleList, setScaleList] = useState(
+    JSON.parse(sessionStorage.getItem('patch') || '[]'),
+  );
+  const [scaleMap, setScaleMap] = useState({});
+
+  useEffect(() => {
+    let mapdata = {};
+    scaleList?.forEach((scale) => {
+      Object.defineProperty(mapdata, scale.id.toLowerCase(), {
+        value: parseFloat(scale.percentage),
+        writable: true,
+      });
+    });
+
+    setScaleMap(mapdata);
+  }, [scaleList.length]);
+
+  const addList = (scale) => {
+    setScaleList((prevList) => {
+      const newList = [...prevList, { ...scale }];
+      const stringfy = JSON.stringify(newList);
+      sessionStorage.setItem('patch', stringfy);
+      return newList;
+    });
+  };
+
+  const removeList = (index) => {
+    setScaleList((prevList) => {
+      const newList = prevList.filter((item, idx) => index !== idx);
+      const stringfy = JSON.stringify(newList);
+      sessionStorage.setItem('patch', stringfy);
+      return newList;
+    });
+  };
+
+  const resetList = () => {
+    setScaleList([]);
+    sessionStorage.clear();
+  };
+
+  return (
+    <ScaleContext.Provider
+      value={{
+        scaleList,
+        scaleMap,
+        addList,
+        removeList,
+        resetList,
+      }}
+    >
+      {children}
+    </ScaleContext.Provider>
+  );
+};
+```
